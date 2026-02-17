@@ -1,9 +1,11 @@
 package io.github.gcng54.cuaseval.ui;
 
+import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
@@ -14,23 +16,35 @@ import io.github.gcng54.cuaseval.model.*;
 import io.github.gcng54.cuaseval.model.TestEnvironment.SensorSite;
 import io.github.gcng54.cuaseval.model.TrackingResult.TrackPoint;
 import io.github.gcng54.cuaseval.terrain.DtedReader;
-import io.github.gcng54.cuaseval.terrain.ShapefileReader;
 import io.github.gcng54.cuaseval.terrain.TerrainMaskCalculator;
 
 import java.io.File;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * JavaFX canvas-based map display for CUAS evaluation visualization.
- * Renders sensor coverage areas, target positions, flight paths,
- * track data, and detection events on a 2-D map projection.
+ * Renders OpenStreetMap tile backgrounds, sensor coverage areas, target positions,
+ * flight paths, track data, and detection events on a 2-D map projection.
  * <p>
  * The map uses an equirectangular projection centred on the test environment.
+ * Background tiles are fetched from OpenStreetMap and cached locally.
  * </p>
  */
 public class MapView extends Pane {
+
+    private static final Logger log = LoggerFactory.getLogger(MapView.class);
 
     private final Canvas canvas;
     private TestEnvironment environment;
@@ -38,24 +52,38 @@ public class MapView extends Pane {
     private EvaluationResult result;
 
     // View parameters
-    private double centreLat = 38.4237;   // default: İzmir
-    private double centreLon = 27.1428;
-    private double zoomLevel = 1.0;        // pixels per metre
-    private double viewScale = 0.05;       // degrees per view width
+    private double centreLat = 38.4;   // default screen centre
+    private double centreLon = 26.8;
+    private double zoomLevel = 1.0;   // pixels per metre
+    private double viewScale = 0.05;  // degrees per view width
 
-    // Shapefile data (world boundaries)
-    private List<ShapefileReader.ShapeRecord> shapeRecords;
+    // ── Web Map Tiles (OSM) ─────────────────────────────────────────────
+    private static final String OSM_TILE_URL = "https://tile.openstreetmap.org/%d/%d/%d.png";
+    private static final File TILE_CACHE_DIR = new File("resources/tile_cache");
+    /** In-memory tile image cache: "z/x/y" → Image */
+    private final Map<String, Image> tileCache = new ConcurrentHashMap<>();
+    /** Tracks tiles currently being downloaded to avoid duplicates */
+    private final Map<String, Boolean> tilesLoading = new ConcurrentHashMap<>();
+    /** Map layer: "osm" (street) or "satellite" */
+    private String mapLayer = "osm";
+    /** Whether to show web tiles as background */
+    private boolean showWebTiles = true;
+    
+    // Satellite tile URL (Esri World Imagery)
+    private static final String SATELLITE_TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/%d/%d/%d";
 
-    // DTED terrain overlay
-    private DtedReader dtedReader;
+    // ── SRTM terrain overlay ────────────────────────────────────────────
+    private DtedReader srtmReader;
     private DtedReader.ElevationGrid elevationGrid;
     private WritableImage terrainImage;
-    private double dtedCentreLon, dtedCentreLat, dtedRadiusKm;
+    private double srtmCentreLon, srtmCentreLat, srtmRadiusKm;
     private boolean showElevation = true;
     private boolean showTerrainMask = false;
 
     // Terrain masking
     private List<TerrainMaskCalculator.TerrainMask> terrainMasks;
+    /** Mask colour opacity (user-adjustable, 0.0–1.0) */
+    private double maskOpacity = 0.35;
 
     // Mouse coordinate tracking (UI-02)
     private double mouseLat = Double.NaN;
@@ -73,8 +101,10 @@ public class MapView extends Pane {
         canvas = new Canvas(800, 600);
         getChildren().add(canvas);
 
-        // Load world shapefile on construction
-        loadShapefile();
+        // Ensure tile cache directory exists
+        if (!TILE_CACHE_DIR.exists()) {
+            TILE_CACHE_DIR.mkdirs();
+        }
 
         // Auto-resize canvas with pane
         widthProperty().addListener((obs, ov, nv) -> {
@@ -138,7 +168,25 @@ public class MapView extends Pane {
                 cb.setContent(content);
             }
         });
-        contextMenu.getItems().addAll(addNodeItem, copyCoordItem);
+        MenuItem toggleTilesItem = new MenuItem("Toggle Map Tiles");
+        toggleTilesItem.setOnAction(e -> {
+            showWebTiles = !showWebTiles;
+            repaint();
+        });
+        MenuItem switchLayerItem = new MenuItem("Switch to Satellite");
+        switchLayerItem.setOnAction(e -> {
+            if ("osm".equals(mapLayer)) {
+                mapLayer = "satellite";
+                switchLayerItem.setText("Switch to OSM");
+            } else {
+                mapLayer = "osm";
+                switchLayerItem.setText("Switch to Satellite");
+            }
+            // Clear tile cache to force reload with new layer
+            tileCache.clear();
+            repaint();
+        });
+        contextMenu.getItems().addAll(addNodeItem, copyCoordItem, toggleTilesItem, switchLayerItem);
 
         setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.SECONDARY) {
@@ -152,24 +200,14 @@ public class MapView extends Pane {
     // ── Data Binding ────────────────────────────────────────────────────
 
     /**
-     * Load world boundaries shapefile for coastline rendering.
-     */
-    private void loadShapefile() {
-        File shpFile = new File("resources/world/World.shp");
-        if (shpFile.exists()) {
-            ShapefileReader reader = new ShapefileReader();
-            shapeRecords = reader.read(shpFile);
-        }
-    }
-
-    /**
-     * Set DTED terrain data for elevation overlay.
+     * Set SRTM terrain data for elevation overlay.
+     * Accepts a DtedReader loaded with SRTM HGT files.
      */
     public void setTerrainData(DtedReader reader, double centreLon, double centreLat, double radiusKm) {
-        this.dtedReader = reader;
-        this.dtedCentreLon = centreLon;
-        this.dtedCentreLat = centreLat;
-        this.dtedRadiusKm = radiusKm;
+        this.srtmReader = reader;
+        this.srtmCentreLon = centreLon;
+        this.srtmCentreLat = centreLat;
+        this.srtmRadiusKm = radiusKm;
         buildTerrainImage();
         repaint();
     }
@@ -188,6 +226,14 @@ public class MapView extends Pane {
      */
     public void setTerrainMasks(List<TerrainMaskCalculator.TerrainMask> masks) {
         this.terrainMasks = masks;
+        repaint();
+    }
+
+    /**
+     * Set the mask overlay opacity (0.0–1.0).
+     */
+    public void setMaskOpacity(double opacity) {
+        this.maskOpacity = Math.max(0.0, Math.min(1.0, opacity));
         repaint();
     }
 
@@ -240,6 +286,23 @@ public class MapView extends Pane {
         repaint();
     }
 
+    /**
+     * Toggle the web tile background on/off.
+     */
+    public void setShowWebTiles(boolean show) {
+        this.showWebTiles = show;
+        repaint();
+    }
+
+    /**
+     * Set the map layer (e.g. "osm").
+     */
+    public void setMapLayer(String layer) {
+        this.mapLayer = layer;
+        tileCache.clear();
+        repaint();
+    }
+
     // ── Rendering ───────────────────────────────────────────────────────
 
     /**
@@ -254,23 +317,23 @@ public class MapView extends Pane {
         gc.setFill(Color.rgb(20, 30, 50));
         gc.fillRect(0, 0, w, h);
 
-        // Terrain elevation overlay (under everything else)
+        // Web map tile background (OSM)
+        if (showWebTiles) {
+            drawWebTiles(gc, w, h);
+        }
+
+        // Terrain elevation overlay (semi-transparent, over tiles)
         if (showElevation && terrainImage != null) {
             drawTerrainOverlay(gc, w, h);
         }
 
-        // World boundaries (coastlines)
-        if (shapeRecords != null) {
-            drawShapefile(gc, w, h);
-        }
-
-        // DTED boundary circle
-        if (dtedReader != null && dtedReader.isLoaded()) {
-            drawDtedBoundary(gc, w, h);
-        }
-
         // Grid
         drawGrid(gc, w, h);
+
+        // SRTM boundary circle
+        if (srtmReader != null && srtmReader.isLoaded()) {
+            drawSrtmBoundary(gc, w, h);
+        }
 
         // Environment
         if (environment != null) {
@@ -291,22 +354,191 @@ public class MapView extends Pane {
             drawTracks(gc, w, h);
         }
 
-        // Terrain mask overlay
+        // Terrain mask overlay (semitransparent)
         if (showTerrainMask && terrainMasks != null) {
             drawTerrainMasks(gc, w, h);
         }
 
-        // Info overlay
-        drawInfoOverlay(gc, w, h);
+        // Bottom info bar (no background rectangle)
+        drawBottomInfoBar(gc, w, h);
+    }
+
+    // ── Web Map Tiles ───────────────────────────────────────────────────
+
+    /**
+     * Compute appropriate OSM zoom level from our viewScale.
+     * OSM zoom: z=0 → 360°/256px, z=18 → ~0.0005°/256px
+     */
+    private int computeOsmZoom(double w) {
+        // viewScale = degrees per view width
+        // At OSM zoom z, one tile = 360/2^z degrees wide
+        // We want enough tiles to cover the view width
+        double degreesPerTile = viewScale; // rough: 1 tile ≈ view width
+        // tile size in degrees at zoom z: 360/(2^z)
+        // z = log2(360 / degreesPerTile)
+        int z = (int) Math.round(Math.log(360.0 / viewScale) / Math.log(2));
+        return Math.max(1, Math.min(18, z));
+    }
+
+    /**
+     * Convert latitude to OSM tile Y at given zoom.
+     */
+    private int latToTileY(double lat, int zoom) {
+        double latRad = Math.toRadians(lat);
+        int n = 1 << zoom;
+        return (int) ((1.0 - Math.log(Math.tan(latRad) + 1.0 / Math.cos(latRad)) / Math.PI) / 2.0 * n);
+    }
+
+    /**
+     * Convert longitude to OSM tile X at given zoom.
+     */
+    private int lonToTileX(double lon, int zoom) {
+        int n = 1 << zoom;
+        return (int) ((lon + 180.0) / 360.0 * n);
+    }
+
+    /**
+     * Convert OSM tile X back to longitude (west edge).
+     */
+    private double tileXToLon(int x, int zoom) {
+        int n = 1 << zoom;
+        return (double) x / n * 360.0 - 180.0;
+    }
+
+    /**
+     * Convert OSM tile Y back to latitude (north edge, Mercator).
+     */
+    private double tileYToLat(int y, int zoom) {
+        int n = 1 << zoom;
+        double latRad = Math.atan(Math.sinh(Math.PI * (1 - 2.0 * y / n)));
+        return Math.toDegrees(latRad);
+    }
+
+    /**
+     * Draw OSM background tiles covering the current viewport.
+     */
+    private void drawWebTiles(GraphicsContext gc, double w, double h) {
+        int zoom = computeOsmZoom(w);
+
+        // Compute view bounds
+        double viewLatMin = yToLat(h, h);
+        double viewLatMax = yToLat(0, h);
+        double viewLonMin = xToLon(0, w);
+        double viewLonMax = xToLon(w, w);
+
+        // Compute tile range
+        int tileXMin = lonToTileX(viewLonMin, zoom);
+        int tileXMax = lonToTileX(viewLonMax, zoom);
+        int tileYMin = latToTileY(viewLatMax, zoom); // note: Y is inverted
+        int tileYMax = latToTileY(viewLatMin, zoom);
+
+        // Clamp
+        int maxTile = (1 << zoom) - 1;
+        tileXMin = Math.max(0, tileXMin);
+        tileXMax = Math.min(maxTile, tileXMax);
+        tileYMin = Math.max(0, tileYMin);
+        tileYMax = Math.min(maxTile, tileYMax);
+
+        // Limit tile count to avoid overload
+        if ((tileXMax - tileXMin + 1) * (tileYMax - tileYMin + 1) > 200) {
+            return; // too many tiles at this zoom, skip
+        }
+
+        for (int tx = tileXMin; tx <= tileXMax; tx++) {
+            for (int ty = tileYMin; ty <= tileYMax; ty++) {
+                Image tileImg = getTileImage(zoom, tx, ty);
+                if (tileImg != null) {
+                    // Tile bounds in geographic coords
+                    double tileLonW = tileXToLon(tx, zoom);
+                    double tileLonE = tileXToLon(tx + 1, zoom);
+                    double tileLatN = tileYToLat(ty, zoom);
+                    double tileLatS = tileYToLat(ty + 1, zoom);
+
+                    // Convert to screen coords
+                    double sx1 = lonToX(tileLonW, w);
+                    double sx2 = lonToX(tileLonE, w);
+                    double sy1 = latToY(tileLatN, h);
+                    double sy2 = latToY(tileLatS, h);
+
+                    gc.setGlobalAlpha(0.85);
+                    gc.drawImage(tileImg, sx1, sy1, sx2 - sx1, sy2 - sy1);
+                    gc.setGlobalAlpha(1.0);
+                }
+            }
+        }
+    }
+
+    /**
+     * Get a tile image from cache, disk, or initiate async download.
+     */
+    private Image getTileImage(int z, int x, int y) {
+        String key = mapLayer + "/" + z + "/" + x + "/" + y;
+
+        // Check in-memory cache first
+        Image cached = tileCache.get(key);
+        if (cached != null) return cached;
+
+        // Check disk cache
+        File cacheFile = new File(TILE_CACHE_DIR, key.replace('/', File.separatorChar) + ".png");
+        cacheFile.getParentFile().mkdirs();
+        if (cacheFile.exists()) {
+            try {
+                Image img = new Image(cacheFile.toURI().toString(), 256, 256, true, true);
+                tileCache.put(key, img);
+                return img;
+            } catch (Exception e) {
+                log.debug("Failed to load cached tile {}: {}", key, e.getMessage());
+            }
+        }
+
+        // Async download
+        if (tilesLoading.putIfAbsent(key, Boolean.TRUE) == null) {
+            Thread downloader = new Thread(() -> {
+                try {
+                    String url = "satellite".equals(mapLayer) 
+                            ? String.format(SATELLITE_TILE_URL, z, y, x)  // note: y,x order for ArcGIS
+                            : String.format(OSM_TILE_URL, z, x, y);
+                    HttpURLConnection conn = (HttpURLConnection) URI.create(url).toURL().openConnection();
+                    conn.setRequestProperty("User-Agent", "CUAS-Eval/2.0 (Educational)");
+                    conn.setConnectTimeout(5000);
+                    conn.setReadTimeout(10000);
+
+                    if (conn.getResponseCode() == 200) {
+                        // Ensure cache directory exists
+                        cacheFile.getParentFile().mkdirs();
+
+                        // Download to disk
+                        try (InputStream in = conn.getInputStream()) {
+                            Files.copy(in, cacheFile.toPath());
+                        }
+
+                        // Load image and cache in memory
+                        Image img = new Image(cacheFile.toURI().toString(), 256, 256, true, true);
+                        tileCache.put(key, img);
+
+                        // Trigger repaint on FX thread
+                        Platform.runLater(this::repaint);
+                    }
+                } catch (Exception e) {
+                    log.debug("Tile download failed {}: {}", key, e.getMessage());
+                } finally {
+                    tilesLoading.remove(key);
+                }
+            }, "tile-dl-" + key);
+            downloader.setDaemon(true);
+            downloader.start();
+        }
+
+        return null; // tile not yet available
     }
 
     // ── Individual Renderers ────────────────────────────────────────────
 
     private void drawGrid(GraphicsContext gc, double w, double h) {
-        gc.setStroke(Color.rgb(40, 50, 70));
+        gc.setStroke(Color.rgb(40, 50, 70, 0.6));
         gc.setLineWidth(0.5);
         gc.setFont(Font.font("Consolas", 10));
-        gc.setFill(Color.rgb(80, 90, 110));
+        gc.setFill(Color.rgb(200, 210, 230, 0.8));
 
         // Determine grid spacing in degrees
         double gridStep = viewScale / 5;
@@ -323,7 +555,7 @@ public class MapView extends Pane {
              lon < centreLon + viewScale; lon += gridStep) {
             double x = lonToX(lon, w);
             gc.strokeLine(x, 0, x, h);
-            gc.fillText(String.format(Locale.ENGLISH, "%.4f°", lon), x + 2, h - 5);
+            gc.fillText(String.format(Locale.ENGLISH, "%.4f°", lon), x + 2, h - 25);
         }
     }
 
@@ -498,46 +730,65 @@ public class MapView extends Pane {
         }
     }
 
-    private void drawInfoOverlay(GraphicsContext gc, double w, double h) {
-        gc.setFill(Color.rgb(0, 0, 0, 0.6));
-        gc.fillRect(0, 0, 260, 100);
-        gc.setFill(Color.WHITE);
+    /**
+     * Draw bottom info bar: screen centre, mouse coords, scenario info.
+     * No background rectangle — text only, positioned at bottom of canvas.
+     */
+    private void drawBottomInfoBar(GraphicsContext gc, double w, double h) {
+        double barY = h - 8; // bottom text line
         gc.setFont(Font.font("Consolas", 11));
-        gc.fillText(String.format(Locale.ENGLISH, "Centre: %.5f, %.5f", centreLat, centreLon), 10, 18);
-        gc.fillText(String.format(Locale.ENGLISH, "Scale: %.4f°/view", viewScale), 10, 34);
-        if (scenario != null) {
-            gc.fillText("Scenario: " + scenario.getName(), 10, 50);
-        }
-        if (result != null) {
-            gc.fillText(String.format(Locale.ENGLISH, "Score: %.1f | %s",
-                    result.getOverallScore(),
-                    result.isPassed() ? "PASS" : "FAIL"), 10, 66);
+
+        // Left side: Screen centre
+        gc.setFill(Color.rgb(255, 255, 255, 0.9));
+        String centreStr = String.format(Locale.ENGLISH,
+                "Centre: %.5f°N  %.5f°E  Scale: %.4f°/view", centreLat, centreLon, viewScale);
+        gc.fillText(centreStr, 8, barY);
+
+        // Middle: Scenario + result info
+        if (scenario != null || result != null) {
+            double midX = w * 0.4;
+            String infoStr = "";
+            if (scenario != null) {
+                infoStr += scenario.getName();
+            }
+            if (result != null) {
+                infoStr += String.format(Locale.ENGLISH, "  Score: %.1f  %s",
+                        result.getOverallScore(), result.isPassed() ? "PASS" : "FAIL");
+            }
+            gc.setFill(result != null && result.isPassed()
+                    ? Color.rgb(100, 255, 100, 0.9) : Color.rgb(255, 200, 100, 0.9));
+            gc.fillText(infoStr, midX, barY);
         }
 
-        // Mouse coordinate display (UI-02)
+        // Right side: Mouse coordinates + elevation
         if (!Double.isNaN(mouseLat)) {
-            String coordStr = String.format(Locale.ENGLISH, "Mouse: %.6f, %.6f", mouseLat, mouseLon);
-            String elevStr = "";
-            if (dtedReader != null && dtedReader.isLoaded()) {
-                double elev = dtedReader.getElevation(mouseLat, mouseLon);
+            String mouseStr = String.format(Locale.ENGLISH,
+                    "Mouse: %.6f°N  %.6f°E", mouseLat, mouseLon);
+
+            // SRTM elevation lookup
+            if (srtmReader != null && srtmReader.isLoaded()) {
+                double elev = srtmReader.getElevation(mouseLat, mouseLon);
                 if (elev != DtedReader.NO_DATA) {
-                    elevStr = String.format(Locale.ENGLISH, "  Elev: %.0f m", elev);
+                    mouseStr += String.format(Locale.ENGLISH, "  Elev: %.0fm", elev);
                 }
             }
-            gc.fillText(coordStr + elevStr, 10, 82);
+
+            double textWidth = mouseStr.length() * 7; // approximate
+            gc.setFill(Color.rgb(255, 255, 255, 0.9));
+            gc.fillText(mouseStr, w - textWidth - 8, barY);
         }
     }
 
-    // ── Projection Helpers ──────────────────────────────────────────────
+    // ── SRTM Terrain Overlay ────────────────────────────────────────────
 
     /**
-     * Build a rasterized elevation image from the DTED grid.
+     * Build a rasterized elevation image from the SRTM grid.
      */
     private void buildTerrainImage() {
-        if (dtedReader == null || !dtedReader.isLoaded()) return;
+        if (srtmReader == null || !srtmReader.isLoaded()) return;
 
         int res = 400; // render resolution
-        elevationGrid = dtedReader.getElevationGrid(dtedCentreLat, dtedCentreLon, dtedRadiusKm, res);
+        elevationGrid = srtmReader.getElevationGrid(srtmCentreLat, srtmCentreLon, srtmRadiusKm, res);
 
         terrainImage = new WritableImage(res, res);
         PixelWriter pw = terrainImage.getPixelWriter();
@@ -550,7 +801,7 @@ public class MapView extends Pane {
             for (int y = 0; y < res; y++) {
                 double elev = elevationGrid.getData()[x][res - 1 - y]; // flip Y
                 if (elev == DtedReader.NO_DATA) {
-                    pw.setColor(x, y, Color.rgb(20, 40, 80, 0.4)); // ocean
+                    pw.setColor(x, y, Color.rgb(20, 40, 80, 0.3)); // ocean
                 } else {
                     double t = (elev - eMin) / eRange;
                     Color c = elevationColor(t, elev);
@@ -561,16 +812,16 @@ public class MapView extends Pane {
     }
 
     /**
-     * Map elevation fraction (0-1) to a terrain colour.
+     * Map elevation fraction (0-1) to a terrain colour (semitransparent).
      */
     private Color elevationColor(double t, double elev) {
-        if (elev <= 0) return Color.rgb(20, 60, 120, 0.5);          // water
-        if (t < 0.15) return Color.rgb(34, 139, 34, 0.6);           // green lowland
-        if (t < 0.30) return Color.rgb(85, 160, 50, 0.6);           // light green
-        if (t < 0.50) return Color.rgb(180, 170, 80, 0.6);          // yellow/brown
-        if (t < 0.70) return Color.rgb(160, 110, 60, 0.6);          // brown
-        if (t < 0.85) return Color.rgb(140, 90, 50, 0.6);           // dark brown
-        return Color.rgb(220, 220, 220, 0.6);                        // snow/peak
+        if (elev <= 0) return Color.rgb(20, 60, 120, 0.35);          // water
+        if (t < 0.15) return Color.rgb(34, 139, 34, 0.40);           // green lowland
+        if (t < 0.30) return Color.rgb(85, 160, 50, 0.40);           // light green
+        if (t < 0.50) return Color.rgb(180, 170, 80, 0.40);          // yellow/brown
+        if (t < 0.70) return Color.rgb(160, 110, 60, 0.40);          // brown
+        if (t < 0.85) return Color.rgb(140, 90, 50, 0.40);           // dark brown
+        return Color.rgb(220, 220, 220, 0.40);                        // snow/peak
     }
 
     private void drawTerrainOverlay(GraphicsContext gc, double w, double h) {
@@ -584,53 +835,27 @@ public class MapView extends Pane {
         gc.drawImage(terrainImage, x1, y1, x2 - x1, y2 - y1);
     }
 
-    private void drawDtedBoundary(GraphicsContext gc, double w, double h) {
-        double cx = lonToX(dtedCentreLon, w);
-        double cy = latToY(dtedCentreLat, h);
-        double radiusPx = metresToPixels(dtedRadiusKm * 1000, w);
+    private void drawSrtmBoundary(GraphicsContext gc, double w, double h) {
+        double cx = lonToX(srtmCentreLon, w);
+        double cy = latToY(srtmCentreLat, h);
+        double radiusPx = metresToPixels(srtmRadiusKm * 1000, w);
 
-        gc.setStroke(Color.rgb(255, 100, 0, 0.7));
-        gc.setLineWidth(2);
+        gc.setStroke(Color.rgb(60, 180, 60, 0.5));
+        gc.setLineWidth(1.5);
         gc.setLineDashes(8, 4);
         gc.strokeOval(cx - radiusPx, cy - radiusPx, radiusPx * 2, radiusPx * 2);
         gc.setLineDashes();
 
         // Label
-        gc.setFill(Color.rgb(255, 100, 0));
+        gc.setFill(Color.rgb(60, 180, 60, 0.8));
         gc.setFont(Font.font("Consolas", 10));
-        gc.fillText(String.format(Locale.ENGLISH, "DTED r=%.0fkm", dtedRadiusKm),
+        gc.fillText(String.format(Locale.ENGLISH, "SRTM r=%.0fkm", srtmRadiusKm),
                 cx + radiusPx + 5, cy);
     }
 
-    private void drawShapefile(GraphicsContext gc, double w, double h) {
-        gc.setStroke(Color.rgb(80, 120, 80, 0.8));
-        gc.setLineWidth(1.0);
-
-        // View bounds for culling
-        double viewLatMin = centreLat - viewScale * h / (2 * w);
-        double viewLatMax = centreLat + viewScale * h / (2 * w);
-        double viewLonMin = centreLon - viewScale / 2;
-        double viewLonMax = centreLon + viewScale / 2;
-
-        for (ShapefileReader.ShapeRecord rec : shapeRecords) {
-            // Bounding box cull
-            if (rec.getMaxX() < viewLonMin || rec.getMinX() > viewLonMax ||
-                rec.getMaxY() < viewLatMin || rec.getMinY() > viewLatMax) {
-                continue;
-            }
-
-            for (double[][] part : rec.getParts()) {
-                if (part.length < 2) continue;
-                gc.beginPath();
-                gc.moveTo(lonToX(part[0][0], w), latToY(part[0][1], h));
-                for (int i = 1; i < part.length; i++) {
-                    gc.lineTo(lonToX(part[i][0], w), latToY(part[i][1], h));
-                }
-                gc.stroke();
-            }
-        }
-    }
-
+    /**
+     * Draw terrain masks with semitransparent, adjustable colours.
+     */
     private void drawTerrainMasks(GraphicsContext gc, double w, double h) {
         if (terrainMasks == null) return;
 
@@ -643,15 +868,22 @@ public class MapView extends Pane {
             double[] azimuths = mask.getAzimuths();
             double[] maskAngles = mask.getMaskAngles();
 
-            // Draw mask angle fan
-            gc.setLineWidth(1);
+            // Draw mask angle fan with semitransparent colours
+            gc.setLineWidth(1.5);
             for (int i = 0; i < azimuths.length; i++) {
                 double az = Math.toRadians(azimuths[i]);
                 double maskAngle = maskAngles[i];
 
-                // Colour by mask angle: green = clear, red = masked
+                // Colour by mask angle: green = clear, yellow = partial, red = masked
                 double t = Math.min(1.0, Math.max(0, maskAngle / 5.0)); // 0-5° scale
-                Color c = Color.color(t, 1.0 - t, 0, 0.4);
+                Color c;
+                if (t < 0.3) {
+                    c = Color.color(0, 0.8, 0.2, maskOpacity * 0.5); // green — clear
+                } else if (t < 0.7) {
+                    c = Color.color(1.0, 0.8, 0, maskOpacity * 0.7); // yellow — partial
+                } else {
+                    c = Color.color(1.0, 0.2, 0, maskOpacity); // red — masked
+                }
                 gc.setStroke(c);
 
                 double endX = sx + maxRangePx * Math.sin(az);
@@ -660,13 +892,13 @@ public class MapView extends Pane {
             }
 
             // Label
-            gc.setFill(Color.WHITE);
+            gc.setFill(Color.rgb(255, 255, 255, 0.7));
             gc.setFont(Font.font("Consolas", 9));
             gc.fillText("Mask", sx + 8, sy - 8);
         }
     }
 
-    // ── Projection Helpers (original) ───────────────────────────────────
+    // ── Projection Helpers ──────────────────────────────────────────────
 
     private double lonToX(double lon, double w) {
         return w / 2 + (lon - centreLon) / viewScale * w;

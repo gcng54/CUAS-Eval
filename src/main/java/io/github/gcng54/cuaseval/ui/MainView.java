@@ -1,7 +1,6 @@
 package io.github.gcng54.cuaseval.ui;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import io.github.gcng54.cuaseval.dti.MultiDtiSystem;
@@ -25,16 +24,17 @@ import java.util.Locale;
  * ┌─────────────────────────────────────────────────────────────┐
  * │  Menu Bar                                                    │
  * ├──────────┬──────────────────────────────────────────────────┤
- * │ Scenario │                                                  │
+ * │ Maps     │                                                  │
  * │ Sensors  │            Map View (expanded)                   │
- * │ Terrain  │                                                  │
- * │ Results  │                                                  │
- * │ Report   │                                                  │
+ * │ Targets  │                                                  │
+ * │ Environ. │                                                  │
+ * │ Scenarios│                                                  │
  * └──────────┴──────────────────────────────────────────────────┘
  * </pre>
  * <p>
- * v2.0: Evaluation and Report panels moved into left tabs so map
- * occupies the full remaining width (UI-01).
+ * v2.0: Main tabs = Maps, Sensors, Targets, Environments, Scenarios.
+ * "Results" renamed to "Evaluation". TerrainPanel replaces DtedPanel.
+ * New TargetsPanel and EnvironmentPanel added.
  * </p>
  */
 public class MainView extends BorderPane {
@@ -45,8 +45,10 @@ public class MainView extends BorderPane {
     private final ScenarioPanel scenarioPanel;
     private final EvaluationPanel evaluationPanel;
     private final ReportPanel reportPanel;
-    private final DtedPanel dtedPanel;
+    private final TerrainPanel terrainPanel;
     private final SensorPanel sensorPanel;
+    private final TargetsPanel targetsPanel;
+    private final EnvironmentPanel environmentPanel;
 
     // ── Constructor ─────────────────────────────────────────────────────
 
@@ -55,8 +57,10 @@ public class MainView extends BorderPane {
         scenarioPanel = new ScenarioPanel();
         evaluationPanel = new EvaluationPanel();
         reportPanel = new ReportPanel();
-        dtedPanel = new DtedPanel();
+        terrainPanel = new TerrainPanel();
         sensorPanel = new SensorPanel();
+        targetsPanel = new TargetsPanel();
+        environmentPanel = new EnvironmentPanel();
 
         // Auto-render UML diagrams to docs/uml_pic/ at startup
         autoRenderUml();
@@ -67,28 +71,28 @@ public class MainView extends BorderPane {
         // Wire up sensor panel callback for multi-DTI configuration
         sensorPanel.setCallback(system -> scenarioPanel.setMultiDtiSystem(system));
 
-        // Wire up DTED panel callback
-        dtedPanel.setCallback(new DtedPanel.DtedCallback() {
+        // Wire up TerrainPanel callback (SRTM + obstacles)
+        terrainPanel.setCallback(new TerrainPanel.TerrainCallback() {
             @Override
-            public void onTerrainLoaded(DtedReader reader, double centreLon, double centreLat, double radiusKm) {
-                mapView.setTerrainData(reader, centreLon, centreLat, radiusKm);
+            public void onSrtmLoaded(File srtmDir, double centreLon, double centreLat, double radiusKm) {
+                // Build a DtedReader pointing at the SRTM directory for elevation queries
+                DtedReader srtmReader = new DtedReader();
+                srtmReader.setSrtmDir(srtmDir);
+                mapView.setTerrainData(srtmReader, centreLon, centreLat, radiusKm);
 
                 // Compute terrain masks for all sensor sites in current scenario
-                // Uses DtedPanel's editable mask parameters (TR-03)
                 if (scenario != null && scenario.getEnvironment() != null) {
-                    int[] maskParams = dtedPanel.getMaskParams();
-                    double antennaHt = dtedPanel.getAntennaHeightM();
-                    TerrainMaskCalculator calc = new TerrainMaskCalculator(reader);
+                    TerrainMaskCalculator calc = new TerrainMaskCalculator(srtmReader);
                     List<TerrainMaskCalculator.TerrainMask> masks = new ArrayList<>();
                     for (TestEnvironment.SensorSite sensor : scenario.getEnvironment().getSensorSites()) {
-                        double sensorAlt = reader.getElevation(
+                        double sensorAlt = srtmReader.getElevation(
                                 sensor.getPosition().getLatitude(),
                                 sensor.getPosition().getLongitude());
                         if (sensorAlt == DtedReader.NO_DATA) sensorAlt = 0;
-                        sensorAlt += antennaHt;
+                        sensorAlt += sensor.getPosition().getAltitudeMsl(); // sensor height AGL
                         TerrainMaskCalculator.TerrainMask mask = calc.computeTerrainMask(
                                 sensor.getPosition(), sensorAlt,
-                                sensor.getMaxRangeM(), maskParams[0], maskParams[1]);
+                                sensor.getMaxRangeM(), 360, 1);
                         if (mask != null) masks.add(mask);
                     }
                     mapView.setTerrainMasks(masks);
@@ -96,13 +100,22 @@ public class MainView extends BorderPane {
             }
 
             @Override
-            public void onTerrainToggle(boolean showElevation, boolean showMask) {
-                mapView.setTerrainDisplay(showElevation, showMask);
+            public void onTerrainToggle(boolean showElevation) {
+                mapView.setTerrainDisplay(showElevation, showElevation);
+            }
+
+            @Override
+            public void onObstaclesUpdated(List<TestEnvironment.Obstacle> obstacles) {
+                if (scenario != null && scenario.getEnvironment() != null) {
+                    scenario.getEnvironment().getObstacles().clear();
+                    scenario.getEnvironment().getObstacles().addAll(obstacles);
+                    mapView.repaint();
+                }
             }
         });
 
-        // Wire up DtedPanel map viewport supplier (UI-04)
-        dtedPanel.setMapViewportSupplier(() -> new double[] {
+        // Wire up TerrainPanel map viewport supplier
+        terrainPanel.setMapViewportSupplier(() -> new double[] {
                 mapView.getCentreLat(), mapView.getCentreLon(), mapView.getVisibleRadiusKm()
         });
 
@@ -140,15 +153,39 @@ public class MainView extends BorderPane {
         // Menu bar
         MenuBar menuBar = createMenuBar();
 
-        // Left panel: all control + result tabs (UI-01)
+        // ── Left panel: Main tabs ──
+        // Maps (Terrain sub-tab embedded), Sensors, Targets, Environments, Scenarios
         TabPane leftTabs = new TabPane();
         leftTabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-        Tab scenarioTab = new Tab("Scenarios", wrapScroll(scenarioPanel));
-        Tab dtedTab = new Tab("Terrain", wrapScroll(dtedPanel));
+
+        // Maps tab — contains a sub-TabPane with Terrain
+        TabPane mapsSubTabs = new TabPane();
+        mapsSubTabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        mapsSubTabs.getTabs().addAll(
+                new Tab("Terrain", wrapScroll(terrainPanel))
+        );
+        Tab mapsTab = new Tab("Maps", mapsSubTabs);
+
+        // Sensors tab (already has sub-tabs: Sensors, DTI, Fusion)
         Tab sensorTab = new Tab("Sensors", wrapScroll(sensorPanel));
-        Tab evalTab = new Tab("Results", wrapScroll(evaluationPanel));
-        Tab reportTab = new Tab("Report", wrapScroll(reportPanel));
-        leftTabs.getTabs().addAll(scenarioTab, sensorTab, dtedTab, evalTab, reportTab);
+
+        // Targets tab (has sub-tabs: Targets, Flight Plans)
+        Tab targetsTab = new Tab("Targets", wrapScroll(targetsPanel));
+
+        // Environments tab (has sub-tabs: Weather, EW)
+        Tab envTab = new Tab("Environments", wrapScroll(environmentPanel));
+
+        // Scenarios tab — contains scenario config, evaluation, and reports
+        TabPane scenarioSubTabs = new TabPane();
+        scenarioSubTabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        scenarioSubTabs.getTabs().addAll(
+                new Tab("Scenarios", wrapScroll(scenarioPanel)),
+                new Tab("Evaluation", wrapScroll(evaluationPanel)),
+                new Tab("Reports", wrapScroll(reportPanel))
+        );
+        Tab scenariosTab = new Tab("Scenarios", scenarioSubTabs);
+
+        leftTabs.getTabs().addAll(mapsTab, sensorTab, targetsTab, envTab, scenariosTab);
 
         // Main split: left tabs | map (2-pane, map gets all remaining space)
         SplitPane mainSplit = new SplitPane();
@@ -156,7 +193,7 @@ public class MainView extends BorderPane {
                 leftTabs,
                 mapView
         );
-        mainSplit.setDividerPositions(0.22);
+        mainSplit.setDividerPositions(0.24);
 
         setTop(menuBar);
         setCenter(mainSplit);
@@ -191,7 +228,9 @@ public class MainView extends BorderPane {
         Menu viewMenu = new Menu("View");
         MenuItem resetZoom = new MenuItem("Reset Zoom");
         resetZoom.setOnAction(e -> mapView.repaint());
-        viewMenu.getItems().add(resetZoom);
+        MenuItem toggleTiles = new MenuItem("Toggle Map Tiles");
+        toggleTiles.setOnAction(e -> mapView.setShowWebTiles(true));
+        viewMenu.getItems().addAll(resetZoom, toggleTiles);
 
         // Requirements menu
         Menu reqMenu = new Menu("Requirements");
@@ -234,13 +273,14 @@ public class MainView extends BorderPane {
     private void showAboutDialog() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About CUAS-Eval");
-        alert.setHeaderText("CUAS-Eval v1.0");
+        alert.setHeaderText("CUAS-Eval v2.0");
         alert.setContentText(
                 "Counter-UAS Evaluation Module\n" +
                 "Based on CEN Workshop Agreement CWA 18150 (COURAGEOUS)\n\n" +
                 "Integrated DTI Performance Evaluation Pipeline\n" +
                 "Detection • Tracking • Identification\n\n" +
-                "Features: Scenario Generation, Metrics Computation,\n" +
+                "Features: OSM Map Tiles, SRTM Terrain,\n" +
+                "Scenario Generation, Metrics Computation,\n" +
                 "Requirement Traceability, Track2KML, HTML Reports"
         );
         alert.showAndWait();

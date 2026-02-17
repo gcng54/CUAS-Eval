@@ -42,8 +42,10 @@ io\github\gcng54\cuaseval\model\CuasSensor.class
 io\github\gcng54\cuaseval\io\AssetManager.class
 io\github\gcng54\cuaseval\CuasEvalApp.class
 io\github\gcng54\cuaseval\model\GeoPosition.class
+io\github\gcng54\cuaseval\ui\TerrainPanel$TerrainCallback.class
 io\github\gcng54\cuaseval\evaluator\EvaluationCriteria$Threshold.class
 io\github\gcng54\cuaseval\Launcher.class
+io\github\gcng54\cuaseval\ui\TargetsPanel.class
 io\github\gcng54\cuaseval\model\TestEnvironment$SensorSite.class
 io\github\gcng54\cuaseval\dti\TrackingSystem.class
 io\github\gcng54\cuaseval\model\SensorLibrary.class
@@ -55,6 +57,7 @@ io\github\gcng54\cuaseval\ui\SensorPanel$SensorCallback.class
 io\github\gcng54\cuaseval\model\TestScenario$Waypoint.class
 io\github\gcng54\cuaseval\terrain\ShapefileReader$ShapeRecord.class
 io\github\gcng54\cuaseval\ui\MainView.class
+io\github\gcng54\cuaseval\ui\TerrainPanel.class
 io\github\gcng54\cuaseval\ui\EvaluationPanel.class
 io\github\gcng54\cuaseval\model\TestEnvironment$EwCondition.class
 io\github\gcng54\cuaseval\terrain\TerrainMaskCalculator.class
@@ -72,6 +75,8 @@ io\github\gcng54\cuaseval\model\TestScenario$FlightPlan.class
 io\github\gcng54\cuaseval\dti\DetectionSystem$1.class
 io\github\gcng54\cuaseval\generator\TestEnvironmentDesigner.class
 io\github\gcng54\cuaseval\report\TestReportGenerator.class
+io\github\gcng54\cuaseval\ui\TerrainPanel$1.class
+io\github\gcng54\cuaseval\ui\EnvironmentPanel.class
 io\github\gcng54\cuaseval\report\UmlRenderer.class
 io\github\gcng54\cuaseval\terrain\TerrainMaskCalculator$TerrainProfile.class
 io\github\gcng54\cuaseval\model\Requirement.class

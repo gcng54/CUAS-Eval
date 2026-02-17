@@ -70,18 +70,18 @@ public class EvaluationPanel extends VBox {
         valCol.setPrefWidth(100);
 
         metricsTable.getColumns().addAll(nameCol, valCol);
-        metricsTable.setPrefHeight(250);
+        metricsTable.setPrefHeight(320);
 
         // Requirement lists
         Label passLabel = new Label("Passed Requirements:");
         passLabel.setStyle("-fx-text-fill: #2e7d32; -fx-font-weight: bold;");
         passedList = new ListView<>();
-        passedList.setPrefHeight(80);
+        passedList.setPrefHeight(180);
 
         Label failLabel = new Label("Failed Requirements:");
         failLabel.setStyle("-fx-text-fill: #c62828; -fx-font-weight: bold;");
         failedList = new ListView<>();
-        failedList.setPrefHeight(80);
+        failedList.setPrefHeight(180);
 
         getChildren().addAll(
                 title, new Separator(),

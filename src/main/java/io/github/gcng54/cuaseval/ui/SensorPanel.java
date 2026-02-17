@@ -10,16 +10,12 @@ import java.util.*;
 import java.util.Locale;
 
 /**
- * Sensor configuration panel for the CUAS-Eval UI.
- * Allows the user to:
- * <ul>
- *   <li>Browse and select CUAS sensors from the sensor library</li>
- *   <li>Configure DTI nodes with sensor type, count, and position</li>
- *   <li>Configure multi-DTI system with fusion strategy</li>
- *   <li>View sensor specifications and system coverage metrics</li>
- * </ul>
+ * Sensor configuration panel with sub-tabs: Sensors, DTI, Fusion.
+ * Provides sensor library browsing, DTI node configuration, and fusion strategy setup.
  */
 public class SensorPanel extends VBox {
+
+    private final TabPane subTabs;
 
     private final ComboBox<String> sensorLibCombo;
     private final TextArea sensorSpecArea;
@@ -27,11 +23,12 @@ public class SensorPanel extends VBox {
     private final TextField nodeIdField;
     private final TextField nodeLatField;
     private final TextField nodeLonField;
+    private final TextField nodeHeightAglField;
     private final ComboBox<String> fusionCombo;
     private final Spinner<Integer> votingKSpinner;
     private final TextArea systemSummaryArea;
 
-    // Library editing fields (SN-02)
+    // Library editing fields
     private final TextField editRangeField;
     private final TextField editPdField;
     private final TextField editEwSensField;
@@ -46,7 +43,7 @@ public class SensorPanel extends VBox {
         void onMultiDtiConfigured(MultiDtiSystem system);
     }
 
-    /** Callback for adding sensors to current scenario (SN-01). */
+    /** Callback for adding sensors to current scenario. */
     public interface AddToScenarioCallback {
         void onAddSensorToScenario(CuasSensor sensor, GeoPosition position);
     }
@@ -57,16 +54,19 @@ public class SensorPanel extends VBox {
     // ── Constructor ─────────────────────────────────────────────────────
 
     public SensorPanel() {
-        setSpacing(8);
-        setPadding(new Insets(10));
-        setPrefWidth(320);
+        setSpacing(4);
+        setPadding(new Insets(5));
 
-        // Title
-        Label title = new Label("Sensor & DTI Configuration");
-        title.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a237e;");
+        subTabs = new TabPane();
+        subTabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        // ── Sensor Library Browser ──
-        Label libLabel = label("Sensor Library:");
+        // ═══ Sensors Sub-Tab ═══
+        VBox sensorsBox = new VBox(8);
+        sensorsBox.setPadding(new Insets(10));
+
+        Label sensTitle = new Label("Sensor Library");
+        sensTitle.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1a237e;");
+
         sensorLibCombo = new ComboBox<>();
         sensorLibCombo.setMaxWidth(Double.MAX_VALUE);
         for (CuasSensor s : SensorLibrary.getAllTemplates()) {
@@ -77,20 +77,17 @@ public class SensorPanel extends VBox {
 
         sensorSpecArea = new TextArea();
         sensorSpecArea.setEditable(false);
-        sensorSpecArea.setPrefRowCount(8);
+        sensorSpecArea.setPrefRowCount(10);
         sensorSpecArea.setStyle("-fx-font-family: Consolas; -fx-font-size: 10px;");
         showSensorSpec();
 
-        // Library editing inline controls (SN-02)
-        Label editLabel = label("── Edit Selected Sensor ──");
+        Label editLabel = new Label("── Edit Selected Sensor ──");
         editLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;");
 
         editRangeField = new TextField();
         editRangeField.setPromptText("Max Range (m)");
-
         editPdField = new TextField();
         editPdField.setPromptText("Base Pd (0-1)");
-
         editEwSensField = new TextField();
         editEwSensField.setPromptText("EW Sensitivity (0-1)");
 
@@ -104,24 +101,42 @@ public class SensorPanel extends VBox {
         removeLibBtn.setStyle("-fx-base: #c62828; -fx-text-fill: white;");
         removeLibBtn.setOnAction(e -> removeSensorFromLibrary());
 
-        // Add to existing scenario button (SN-01)
         Button addToScenarioBtn = new Button("Add Sensor to Scenario");
         addToScenarioBtn.setMaxWidth(Double.MAX_VALUE);
         addToScenarioBtn.setStyle("-fx-base: #1565C0; -fx-text-fill: white;");
         addToScenarioBtn.setOnAction(e -> addSensorToScenario());
 
-        // ── DTI Node Configuration ──
-        Label nodeTitle = label("── DTI Nodes ──");
-        nodeTitle.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;");
+        sensorsBox.getChildren().addAll(
+                sensTitle, new Separator(),
+                label("Sensor Library:"), sensorLibCombo,
+                sensorSpecArea,
+                editLabel,
+                label("Max Range (m):"), editRangeField,
+                label("Base Pd:"), editPdField,
+                label("EW Sensitivity:"), editEwSensField,
+                updateLibBtn, removeLibBtn,
+                new Separator(),
+                addToScenarioBtn
+        );
+
+        // ═══ DTI Sub-Tab ═══
+        VBox dtiBox = new VBox(8);
+        dtiBox.setPadding(new Insets(10));
+
+        Label dtiTitle = new Label("DTI Node Configuration");
+        dtiTitle.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1a237e;");
 
         nodeIdField = new TextField();
         nodeIdField.setPromptText("Node name (auto-generated)");
 
-        nodeLatField = new TextField("38.4237");
+        nodeLatField = new TextField("38.4");
         nodeLatField.setPromptText("Node Latitude");
 
-        nodeLonField = new TextField("27.1428");
+        nodeLonField = new TextField("26.8");
         nodeLonField.setPromptText("Node Longitude");
+
+        nodeHeightAglField = new TextField("10");
+        nodeHeightAglField.setPromptText("Sensor Height AGL (m)");
 
         Button addNodeBtn = new Button("+ Add Node");
         addNodeBtn.setStyle("-fx-background-color: #2e7d32; -fx-text-fill: white;");
@@ -142,35 +157,11 @@ public class SensorPanel extends VBox {
         HBox.setHgrow(removeNodeBtn, Priority.ALWAYS);
 
         nodeListView = new ListView<>();
-        nodeListView.setPrefHeight(120);
-        nodeListView.setStyle("-fx-font-family: Consolas; -fx-font-size: 10px;");
+        nodeListView.setPrefHeight(200);
+        nodeListView.setStyle("-fx-font-family: Consolas; -fx-font-size: 11px;");
 
-        // ── Fusion Configuration ──
-        Label fusionTitle = label("── Fusion Strategy ──");
-        fusionTitle.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;");
-
-        fusionCombo = new ComboBox<>();
-        fusionCombo.getItems().addAll("OR Logic (Max Sensitivity)", "Voting (k-of-n)",
-                "AND Logic (Min FAR)", "Best Sensor");
-        fusionCombo.getSelectionModel().selectFirst();
-        fusionCombo.setMaxWidth(Double.MAX_VALUE);
-        fusionCombo.setOnAction(e -> onFusionChanged());
-
-        votingKSpinner = new Spinner<>(2, 10, 2);
-        votingKSpinner.setEditable(true);
-        votingKSpinner.setDisable(true);
-
-        // ── System Summary ──
-        Label summaryTitle = label("── System Summary ──");
-        summaryTitle.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;");
-
-        systemSummaryArea = new TextArea("No nodes configured.");
-        systemSummaryArea.setEditable(false);
-        systemSummaryArea.setPrefRowCount(6);
-        systemSummaryArea.setStyle("-fx-font-family: Consolas; -fx-font-size: 10px;");
-
-        // ── Quick Templates ──
-        Label quickLabel = label("── Quick Setup ──");
+        // Quick templates
+        Label quickLabel = new Label("── Quick Setup ──");
         quickLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;");
 
         Button basicSetup = new Button("Basic Radar + EO/IR");
@@ -185,40 +176,69 @@ public class SensorPanel extends VBox {
         fullSetup.setMaxWidth(Double.MAX_VALUE);
         fullSetup.setOnAction(e -> setupFullConfig());
 
-        // ── Layout ──
-        getChildren().addAll(
-                title,
-                new Separator(),
-                libLabel, sensorLibCombo,
-                sensorSpecArea,
-                editLabel,
-                label("Max Range (m):"), editRangeField,
-                label("Base Pd:"), editPdField,
-                label("EW Sensitivity:"), editEwSensField,
-                updateLibBtn,
-                removeLibBtn,
-                addToScenarioBtn,
-                new Separator(),
-                nodeTitle,
+        dtiBox.getChildren().addAll(
+                dtiTitle, new Separator(),
                 label("Node Name:"), nodeIdField,
-                label("Latitude:"), nodeLatField,
-                label("Longitude:"), nodeLonField,
-                nodeButtons,
-                clearBtn,
+                label("Position Latitude:"), nodeLatField,
+                label("Position Longitude:"), nodeLonField,
+                label("Sensor Height AGL (m):"), nodeHeightAglField,
+                new Separator(),
+                nodeButtons, clearBtn,
                 label("Active Nodes:"), nodeListView,
                 new Separator(),
-                fusionTitle,
+                quickLabel,
+                basicSetup, advancedSetup, fullSetup
+        );
+
+        // ═══ Fusion Sub-Tab ═══
+        VBox fusionBox = new VBox(8);
+        fusionBox.setPadding(new Insets(10));
+
+        Label fusionTitle = new Label("Fusion Strategy");
+        fusionTitle.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1a237e;");
+
+        fusionCombo = new ComboBox<>();
+        fusionCombo.getItems().addAll("OR Logic (Max Sensitivity)", "Voting (k-of-n)",
+                "AND Logic (Min FAR)", "Best Sensor");
+        fusionCombo.getSelectionModel().selectFirst();
+        fusionCombo.setMaxWidth(Double.MAX_VALUE);
+        fusionCombo.setOnAction(e -> onFusionChanged());
+
+        votingKSpinner = new Spinner<>(2, 10, 2);
+        votingKSpinner.setEditable(true);
+        votingKSpinner.setDisable(true);
+
+        Label summaryTitle = new Label("── System Summary ──");
+        summaryTitle.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #333;");
+
+        systemSummaryArea = new TextArea("No nodes configured.");
+        systemSummaryArea.setEditable(false);
+        systemSummaryArea.setPrefRowCount(10);
+        systemSummaryArea.setStyle("-fx-font-family: Consolas; -fx-font-size: 10px;");
+
+        fusionBox.getChildren().addAll(
+                fusionTitle, new Separator(),
                 label("Detection Fusion:"), fusionCombo,
                 label("Voting k:"), votingKSpinner,
                 new Separator(),
-                summaryTitle,
-                systemSummaryArea,
-                new Separator(),
-                quickLabel,
-                basicSetup,
-                advancedSetup,
-                fullSetup
+                summaryTitle, systemSummaryArea
         );
+
+        // Add sub-tabs
+        Tab sensorsTab = new Tab("Sensors", wrapScroll(sensorsBox));
+        Tab dtiTab = new Tab("DTI", wrapScroll(dtiBox));
+        Tab fusionTab = new Tab("Fusion", wrapScroll(fusionBox));
+        subTabs.getTabs().addAll(sensorsTab, dtiTab, fusionTab);
+
+        getChildren().add(subTabs);
+        VBox.setVgrow(subTabs, Priority.ALWAYS);
+    }
+
+    private ScrollPane wrapScroll(javafx.scene.Node node) {
+        ScrollPane sp = new ScrollPane(node);
+        sp.setFitToWidth(true);
+        sp.setFitToHeight(true);
+        return sp;
     }
 
     // ── API ─────────────────────────────────────────────────────────────
@@ -293,13 +313,16 @@ public class SensorPanel extends VBox {
 
             double lat = Double.parseDouble(nodeLatField.getText());
             double lon = Double.parseDouble(nodeLonField.getText());
-            GeoPosition pos = new GeoPosition(lat, lon, 0);
+            double heightAgl = 10;
+            try { heightAgl = Double.parseDouble(nodeHeightAglField.getText()); }
+            catch (NumberFormatException ignored) {}
+            GeoPosition pos = new GeoPosition(lat, lon, heightAgl);
 
             multiDti.addNode(nodeId, sensor.getName(), pos, sensor);
 
             nodeListView.getItems().add(String.format(Locale.ENGLISH,
-                    "%s: %s @ %.4f,%.4f (%.0fm)",
-                    nodeId, sensor.getSensorId(), lat, lon, sensor.getMaxRangeM()));
+                    "%s: %s @ %.4f,%.4f h=%.0fm (%.0fm)",
+                    nodeId, sensor.getSensorId(), lat, lon, heightAgl, sensor.getMaxRangeM()));
 
             nodeIdField.clear();
             updateSystemSummary();

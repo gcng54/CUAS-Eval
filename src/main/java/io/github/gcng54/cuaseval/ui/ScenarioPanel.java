@@ -28,6 +28,8 @@ public class ScenarioPanel extends VBox {
     private final TextArea logArea;
     private final Label scenarioDescLabel;
     private final Button runButton;
+    private final Button newScenarioButton;
+    private final Button loadScenarioButton;
 
     private final TestScenarioGenerator scenarioGen = new TestScenarioGenerator();
 
@@ -94,10 +96,10 @@ public class ScenarioPanel extends VBox {
         }
         courageousScenarioCombo.getSelectionModel().selectFirst();
 
-        // Centre position
-        latField = new TextField("38.4237");
+        // Centre position (default: 26.8°E, 38.4°N)
+        latField = new TextField("38.4000");
         latField.setPromptText("Latitude");
-        lonField = new TextField("27.1428");
+        lonField = new TextField("26.8000");
         lonField.setPromptText("Longitude");
 
         // Target count
@@ -118,6 +120,21 @@ public class ScenarioPanel extends VBox {
         }
         ewCombo.getSelectionModel().selectFirst();
 
+        // Scenario management buttons
+        newScenarioButton = new Button("🆕 New Scenario");
+        newScenarioButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 6 16;");
+        newScenarioButton.setMaxWidth(Double.MAX_VALUE);
+        newScenarioButton.setOnAction(e -> newScenario());
+
+        loadScenarioButton = new Button("📂 Load Scenario");
+        loadScenarioButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 6 16;");
+        loadScenarioButton.setMaxWidth(Double.MAX_VALUE);
+        loadScenarioButton.setOnAction(e -> loadScenario());
+
+        HBox scenBtns = new HBox(5, newScenarioButton, loadScenarioButton);
+        HBox.setHgrow(newScenarioButton, Priority.ALWAYS);
+        HBox.setHgrow(loadScenarioButton, Priority.ALWAYS);
+
         // Run button
         runButton = new Button("▶  Run Evaluation");
         runButton.setStyle("-fx-background-color: #1a237e; -fx-text-fill: white; " +
@@ -134,6 +151,8 @@ public class ScenarioPanel extends VBox {
         // Layout
         getChildren().addAll(
                 title,
+                new Separator(),
+                scenBtns,
                 new Separator(),
                 label("Scenario Type:"), scenarioTypeCombo,
                 scenarioDescLabel,
@@ -360,6 +379,68 @@ public class ScenarioPanel extends VBox {
         if (ewCondition != null && ewCondition != TestEnvironment.EwCondition.NONE
                 && scenario.getEnvironment() != null) {
             scenario.getEnvironment().setEwCondition(ewCondition);
+        }
+    }
+
+    // ── New/Load Scenario ───────────────────────────────────────────────
+
+    /**
+     * Create a new scenario by resetting all fields to defaults.
+     */
+    private void newScenario() {
+        scenarioTypeCombo.setValue("Single Target");
+        latField.setText("38.4000");
+        lonField.setText("26.8000");
+        targetCountSpinner.getValueFactory().setValue(5);
+        weatherCombo.setValue("Clear");
+        ewCombo.setValue("None");
+        logArea.clear();
+        appendLog("New scenario created. Configure parameters and run evaluation.");
+    }
+
+    /**
+     * Load a scenario from a JSON file.
+     */
+    private void loadScenario() {
+        javafx.stage.FileChooser fc = new javafx.stage.FileChooser();
+        fc.setTitle("Load Scenario");
+        fc.getExtensionFilters().add(
+                new javafx.stage.FileChooser.ExtensionFilter("JSON Files", "*.json"));
+        fc.setInitialDirectory(new java.io.File("assets/scenarios/"));
+        
+        java.io.File file = fc.showOpenDialog(getScene().getWindow());
+        if (file != null) {
+            try {
+                // Extract scenario ID from filename (remove .json extension)
+                String scenarioId = file.getName().replace(".json", "");
+                io.github.gcng54.cuaseval.io.AssetManager assetMgr = 
+                        new io.github.gcng54.cuaseval.io.AssetManager();
+                TestScenario loaded = assetMgr.loadScenario(scenarioId);
+                appendLog("Loaded scenario: " + loaded.getName());
+                
+                // Populate fields from loaded scenario
+                if (loaded.getEnvironment() != null && 
+                        loaded.getEnvironment().getCentrePosition() != null) {
+                    latField.setText(String.format(Locale.ENGLISH, "%.4f", 
+                            loaded.getEnvironment().getCentrePosition().getLatitude()));
+                    lonField.setText(String.format(Locale.ENGLISH, "%.4f", 
+                            loaded.getEnvironment().getCentrePosition().getLongitude()));
+                }
+                
+                // Set scenario type from name if possible
+                if (loaded.getName().startsWith("S")) {
+                    String code = loaded.getName().split("\\s+")[0];
+                    for (String item : scenarioTypeCombo.getItems()) {
+                        if (item.startsWith(code + ":")) {
+                            scenarioTypeCombo.setValue(item);
+                            break;
+                        }
+                    }
+                }
+                
+            } catch (Exception ex) {
+                appendLog("Error loading scenario: " + ex.getMessage());
+            }
         }
     }
 
