@@ -1,0 +1,76 @@
+@startuml test-evaluation
+!theme cerulean
+title Test Evaluation & Reporting Flow\nCWA 18150 Requirement Compliance Check
+
+skinparam sequence {
+    ArrowColor #1565C0
+    LifeLineBorderColor #1565C0
+    ParticipantBackgroundColor #E3F2FD
+}
+
+actor "User" as user
+participant "ScenarioPanel" as sp
+participant "TestScenarioGenerator" as tsg
+participant "TestEvaluator" as eval
+participant "DtiPipeline" as dti
+participant "EvaluationCriteria" as crit
+participant "MetricsCalculator" as mc
+participant "MapView" as map
+participant "EvaluationPanel" as ep
+participant "ReportPanel" as rp
+participant "TestReportGenerator" as trg
+participant "KmlExporter" as kml
+
+== Scenario Configuration ==
+
+user -> sp : Configure scenario\n(type, position, weather)
+sp -> tsg : createScenario(params)
+tsg -> tsg : generateTargets()
+tsg -> tsg : designEnvironment()
+tsg -> tsg : generateFlightPlans()
+tsg --> sp : TestScenario
+
+== Evaluation ==
+
+sp -> eval : evaluate(scenario)
+eval -> dti : execute(scenario)
+
+group DTI Pipeline
+    dti -> dti : Phase 1: Detection
+    note right: FR01, FR02, FR09\nTP_D01-D21
+    dti -> dti : Phase 2: Tracking
+    note right: FR04, FR17, FR18\nTP_T01-T09
+    dti -> dti : Phase 3: Identification
+    note right: FR06, FR14, FR16\nTP_I01-I11
+end
+
+dti --> eval : EvaluationResult\n(raw DTI data)
+
+eval -> crit : evaluateRequirement(reqId, result)
+loop each linked requirement
+    crit --> eval : pass / fail
+end
+
+eval -> mc : computeAllMetrics(result)
+mc --> eval : Map<String, Double>
+
+eval --> sp : EvaluationResult\n(with compliance)
+
+== Display ==
+
+sp -> map : setScenario(scenario)
+sp -> map : setEvaluationResult(result)
+sp -> ep : updateResults(result)
+sp -> rp : setEvaluationData(scenario, result)
+
+== Report Export ==
+
+user -> rp : "Export HTML Report"
+rp -> trg : generateHtmlReport(scenario, result, file)
+trg --> rp : HTML file saved
+
+user -> rp : "Export KML"
+rp -> kml : export(scenario, result, file)
+kml --> rp : KML file saved
+
+@enduml

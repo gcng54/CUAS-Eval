@@ -1,0 +1,163 @@
+@startuml component-diagram
+!theme cerulean
+title CUAS-Eval v2.0 Component Architecture\nModule Dependencies & Package Structure
+
+skinparam component {
+    BackgroundColor #FFFFFF
+    BorderColor #1565C0
+}
+
+skinparam note {
+    BackgroundColor #FFF9C4
+    BorderColor #F9A825
+}
+
+package "org.cuas.eval" {
+
+    package "model" {
+        [Requirement] as REQ
+        [GeoPosition] as GEO
+        [UasTarget] as TGT
+        [TestEnvironment] as ENV
+        [TestScenario] as SCN
+        [DetectionResult] as DRES
+        [TrackingResult] as TRES
+        [IdentificationResult] as IRES
+        [EvaluationResult] as EVAL
+        [CuasSensor] as CSENS
+        [SensorLibrary] as SLIB
+        [EwCondition] as EW #E8F5E9
+        [ObstacleType] as OT #E8F5E9
+        [FlightPattern] as FP #E8F5E9
+    }
+
+    package "dti" {
+        [DetectionSystem] as DETSYS
+        [TrackingSystem] as TRKSYS
+        [IdentificationSystem] as IDSYS
+        [DtiPipeline] as DTI
+        [MultiDtiSystem] as MDTI
+    }
+
+    package "generator" {
+        [TestTargetGenerator] as TGEN
+        [TestEnvironmentDesigner] as EDESIGN
+        [TestScenarioGenerator] as SGEN
+        [FlightPlanGenerator] as FPGEN #E8F5E9
+    }
+
+    package "evaluator" {
+        [TestEvaluator] as TEVAL
+        [EvaluationCriteria] as CRIT
+        [MetricsCalculator] as MCALC
+    }
+
+    package "requirements" {
+        [RequirementsManager] as RMGR
+    }
+
+    package "report" {
+        [TestReportGenerator] as RGEN
+        [KmlExporter] as KEXP
+        [UmlRenderer] as UMLR
+    }
+
+    package "terrain" {
+        [DtedReader] as DREAD
+        [SrtmDownloader] as SRTM
+        [TerrainMaskCalculator] as TMC
+        [ShapefileReader] as SHP
+    }
+
+    package "ui" {
+        [CuasEvalApp] as APP
+        [MainView] as MV
+        [MapView] as MAP
+        [ScenarioPanel] as SP
+        [EvaluationPanel] as EP
+        [ReportPanel] as RP
+        [SensorPanel] as SENSP
+        [DtedPanel] as DTED
+        [UmlPanel] as UMLP
+    }
+
+    package "io" #E8F5E9 {
+        [AssetManager] as AMGR
+    }
+}
+
+note right of AMGR
+  <b>NEW v2.0 (AM-01):</b>
+  JSON save/load for all asset types:
+  Sensors, Targets, Environments,
+  Scenarios, EvaluationCriteria
+end note
+
+note bottom of FPGEN
+  <b>NEW v2.0 (TG-02):</b>
+  Flight pattern generation:
+  Line, Orbit, Racetrack,
+  Random Walk, Approach-Retreat
+end note
+
+' External dependencies
+cloud "JavaFX 21" as JFX
+cloud "Jackson JSON" as JACKSON
+cloud "Apache Commons Math" as MATH
+cloud "SLF4J + Logback" as LOG
+cloud "JAXB (KML)" as JAXB
+
+' Internal dependencies
+DTI --> DETSYS
+DTI --> TRKSYS
+DTI --> IDSYS
+MDTI --> DTI : "N × pipelines"
+MDTI --> CSENS : "sensor configs"
+DETSYS --> CSENS : "sensor-specific Pd"
+DETSYS --> EW : "EW degradation"
+TEVAL --> DTI
+TEVAL --> MDTI : "multi-DTI eval"
+TEVAL --> CRIT
+TEVAL --> MCALC
+TEVAL --> RMGR
+SGEN --> TGEN
+SGEN --> EDESIGN
+SGEN --> FPGEN : "flight plans"
+APP --> MV
+MV --> MAP
+MV --> SP
+MV --> EP
+MV --> RP
+MV --> SENSP
+MV --> DTED
+MV --> UMLR : "auto-render at startup"
+SP --> SGEN
+SP --> TEVAL
+SP --> MDTI : "multi-DTI execution"
+SENSP --> SLIB : "browse/edit sensors"
+SENSP --> MDTI : "configure nodes"
+RP --> RGEN
+RP --> KEXP
+RMGR ..> JACKSON : uses
+SLIB --> CSENS : "templates"
+TMC --> DREAD : "elevation queries"
+TMC --> OT : "obstacle LOS"
+MAP --> TMC : "coverage display"
+DTED --> DREAD
+DTED --> SRTM
+DTED --> TMC
+AMGR --> JACKSON : "serialize/deserialize"
+AMGR --> SCN
+AMGR --> CSENS
+AMGR --> CRIT
+ENV --> EW : "EW condition"
+
+' External
+MAP ..> JFX
+APP ..> JFX
+RMGR ..> JACKSON
+MCALC ..> MATH
+RGEN ..> LOG
+KEXP ..> JAXB
+
+@enduml

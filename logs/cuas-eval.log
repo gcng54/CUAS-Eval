@@ -1,0 +1,592 @@
+2026-02-17 10:06:04.283 [main] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Starting CUAS-Eval...
+2026-02-17 10:06:04.300 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╔═══════════════════════════════════════════════════╗
+2026-02-17 10:06:04.300 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║       CUAS-Eval v1.0 — CWA 18150 Evaluator      ║
+2026-02-17 10:06:04.300 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║     Counter-UAS DTI Performance Evaluation       ║
+2026-02-17 10:06:04.300 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╚═══════════════════════════════════════════════════╝
+2026-02-17 10:06:04.336 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Shapefile: type=5, length=1498276 bytes
+2026-02-17 10:06:04.360 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Read 213 shape records from World.shp
+2026-02-17 10:06:04.555 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:06:04.563 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:06:04.690 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:06:04.694 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:06:04.718 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: component-diagram.puml
+2026-02-17 10:06:05.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Application started successfully.
+2026-02-17 10:06:06.463 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → component-diagram.png (252939 bytes)
+2026-02-17 10:06:06.463 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: data-model.puml
+2026-02-17 10:06:07.101 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → data-model.png (376298 bytes)
+2026-02-17 10:06:07.101 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: dti-pipeline.puml
+2026-02-17 10:06:07.624 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → dti-pipeline.png (269918 bytes)
+2026-02-17 10:06:07.625 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: requirements-traceability.puml
+2026-02-17 10:06:07.829 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → requirements-traceability.png (114386 bytes)
+2026-02-17 10:06:07.830 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: system-overview.puml
+2026-02-17 10:06:08.130 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → system-overview.png (205991 bytes)
+2026-02-17 10:06:08.130 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: test-evaluation.puml
+2026-02-17 10:06:08.516 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → test-evaluation.png (203842 bytes)
+2026-02-17 10:06:08.516 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - UML rendering complete: 6/6 diagrams rendered to docs\uml_pic
+2026-02-17 10:06:08.516 [uml-auto-render] INFO  io.github.gcng54.cuaseval.ui.MainView - Auto-rendered 6/6 UML diagrams to docs/uml_pic/
+2026-02-17 10:10:24.745 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N01] Pulse Doppler Radar — Short Range @ (38.421130, 26.773230, 0.0 m) sensor=Pulse Doppler Radar — Short Range
+2026-02-17 10:10:47.832 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N02] Multi-Spectral EO/IR Suite @ (38.441130, 26.783230, 0.0 m) sensor=Multi-Spectral EO/IR Suite
+2026-02-17 10:11:25.357 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Need 1 SRTM tiles for boundary (lat=38.4237, lon=26.77323, r=10.0km)
+2026-02-17 10:11:25.357 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Downloading SRTM tile 1/1: https://elevation-tiles-prod.s3.amazonaws.com/skadi/N38/N38E026.hgt.gz → N38E026.hgt
+2026-02-17 10:11:27.357 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM tile N38E026 downloaded OK (25934402 bytes)
+2026-02-17 10:11:27.357 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM download complete: 1 downloaded, 0 skipped, 0 failed
+2026-02-17 10:11:27.359 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 10:11:30.551 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Building DTED cache from resources\srtm → resources\dted\dted_all.dtcache
+2026-02-17 10:11:30.551 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Detected format: .hgt (3601 posts per tile)
+2026-02-17 10:11:30.552 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Found 1 tiles, bounds: lon [26, 26], lat [38, 38]
+2026-02-17 10:11:30.985 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache built: 25927679 bytes (3601 posts), 1 tiles present
+2026-02-17 10:11:31.153 [dted-cache-loader] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache loaded (v2): lon [26, 26], lat [38, 38], 1×1 grid, 3601 posts/tile
+2026-02-17 10:11:31.166 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 10:11:55.419 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:11:55.422 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:11:55.424 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestEnvironmentDesigner - Created open-field environment: Env[Multi-Target Test] centre=(38.442213, 26.761730, 0.0 m) radius=8000m weather=CLEAR sensors=2
+2026-02-17 10:11:55.425 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[27B05402] MULTI-1 class=C0 mass=200g pos=(38.494905, 26.761730, 25.5 m)
+2026-02-17 10:11:55.425 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[BA8A7773] MULTI-2 class=C2 mass=3500g pos=(38.470227, 26.787716, 67.4 m)
+2026-02-17 10:11:55.425 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[45D4FCB8] MULTI-3 class=C2 mass=3500g pos=(38.455367, 26.813419, 77.4 m)
+2026-02-17 10:11:55.425 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[31AE0F3C] MULTI-4 class=C2 mass=3500g pos=(38.430013, 26.809670, 89.6 m)
+2026-02-17 10:11:55.425 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[4A4FD1E2] MULTI-5 class=C2 mass=3500g pos=(38.408394, 26.793101, 58.9 m)
+2026-02-17 10:11:55.425 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[BC468AEB] MULTI-6 class=C3 mass=20000g pos=(38.383446, 26.761730, 102.6 m)
+2026-02-17 10:11:55.425 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[0BA6DCC1] MULTI-7 class=C2 mass=3500g pos=(38.414769, 26.736272, 201.7 m)
+2026-02-17 10:11:55.426 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[92ACC9C5] MULTI-8 class=C2 mass=3500g pos=(38.432444, 26.723344, 104.3 m)
+2026-02-17 10:11:55.426 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[29F414AB] MULTI-9 class=C1 mass=800g pos=(38.454871, 26.711991, 148.0 m)
+2026-02-17 10:11:55.426 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[0A0B7B74] MULTI-10 class=C3 mass=20000g pos=(38.483840, 26.723116, 214.5 m)
+2026-02-17 10:11:55.426 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated multi-target set: 10 targets
+2026-02-17 10:11:55.427 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestScenarioGenerator - Created multi-target scenario: Scenario[SC-002] 'Multi-UAS Simultaneous Detection (10 targets)' targets=10 duration=180s reqs=5
+2026-02-17 10:11:55.427 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ╔═══════════════════════════════════════════════════╗
+2026-02-17 10:11:55.427 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ║ MULTI-DTI SYSTEM EXECUTION: 2 nodes              ║
+2026-02-17 10:11:55.427 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ╚═══════════════════════════════════════════════════╝
+2026-02-17 10:11:55.427 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N01 ──
+2026-02-17 10:11:55.427 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N01] ═══
+2026-02-17 10:11:55.427 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[27B05402] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[BA8A7773] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[45D4FCB8] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[31AE0F3C] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[4A4FD1E2] detected=true latency=0.22s error=0.9m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[BC468AEB] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[0BA6DCC1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[92ACC9C5] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[29F414AB] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[0A0B7B74] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.428 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:11:55.434 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[4A4FD1E2→TRK-4A4FD1E2] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 10:11:55.434 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:11:55.435 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[4A4FD1E2] identified=true class=C2 correct=true conf=0.87
+2026-02-17 10:11:55.439 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N01] score=34.0 pass=false Pd=0.10 Pt=0.00 Pi=1.00 compliance=0.0% ═══
+2026-02-17 10:11:55.439 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N01 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:11:55.439 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N02 ──
+2026-02-17 10:11:55.439 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N02] ═══
+2026-02-17 10:11:55.439 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[27B05402] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[BA8A7773] detected=true latency=0.27s error=4.0m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[45D4FCB8] detected=true latency=0.13s error=4.6m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[31AE0F3C] detected=true latency=0.32s error=1.6m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[4A4FD1E2] detected=true latency=0.38s error=2.0m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[BC468AEB] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[0BA6DCC1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[92ACC9C5] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[29F414AB] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[0A0B7B74] detected=false latency=0.00s error=0.0m
+2026-02-17 10:11:55.440 [JavaFX Application Thread] WARN  io.github.gcng54.cuaseval.dti.DetectionSystem - False alarm generated: FALSE_ALARM_1
+2026-02-17 10:11:55.440 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:11:55.442 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[BA8A7773→TRK-BA8A7773] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 10:11:55.444 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[45D4FCB8→TRK-45D4FCB8] maintained=false drops=1 meanErr=4.3m points=178
+2026-02-17 10:11:55.446 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[31AE0F3C→TRK-31AE0F3C] maintained=false drops=7 meanErr=3.7m points=174
+2026-02-17 10:11:55.448 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[4A4FD1E2→TRK-4A4FD1E2] maintained=false drops=5 meanErr=3.6m points=173
+2026-02-17 10:11:55.448 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:11:55.448 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[BA8A7773] identified=true class=C2 correct=true conf=0.87
+2026-02-17 10:11:55.448 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[45D4FCB8] identified=true class=C2 correct=true conf=0.51
+2026-02-17 10:11:55.448 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[31AE0F3C] identified=false class=NOT_IDENTIFIED correct=false conf=0.00
+2026-02-17 10:11:55.448 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[4A4FD1E2] identified=true class=UNKNOWN correct=false conf=0.80
+2026-02-17 10:11:55.448 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N02] score=38.5 pass=false Pd=0.40 Pt=0.00 Pi=0.75 compliance=0.0% ═══
+2026-02-17 10:11:55.448 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N02 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:11:55.452 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ═══ FUSED RESULT: Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f} ═══
+2026-02-17 10:11:55.481 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.evaluator.MetricsCalculator - Computed 21 metrics for scenario SC-002-FUSED
+2026-02-17 10:13:26.774 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N01] Phased Array 3D Radar — Long Range @ (38.441130, 26.783230, 0.0 m) sensor=Phased Array 3D Radar — Long Range
+2026-02-17 10:13:26.774 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N02] Pulse Doppler Radar — Short Range @ (38.451130, 26.783230, 0.0 m) sensor=Pulse Doppler Radar — Short Range
+2026-02-17 10:13:26.774 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N03] Compact Surveillance Radar @ (38.441130, 26.793230, 0.0 m) sensor=Compact Surveillance Radar
+2026-02-17 10:13:26.774 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N04] Multi-Spectral EO/IR Suite @ (38.438130, 26.786230, 0.0 m) sensor=Multi-Spectral EO/IR Suite
+2026-02-17 10:13:26.774 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N05] MWIR Thermal Imager — Cooled @ (38.446130, 26.778230, 0.0 m) sensor=MWIR Thermal Imager — Cooled
+2026-02-17 10:13:26.774 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N06] Wideband SDR Scanner @ (38.441130, 26.778230, 0.0 m) sensor=Wideband SDR Scanner
+2026-02-17 10:13:26.774 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N07] RF Protocol Analyser @ (38.443130, 26.788230, 0.0 m) sensor=RF Protocol Analyser
+2026-02-17 10:13:26.774 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[N08] Microphone Array — 16-element @ (38.440130, 26.782230, 0.0 m) sensor=Microphone Array — 16-element
+2026-02-17 10:13:30.731 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestEnvironmentDesigner - Created open-field environment: Env[Multi-Target Test] centre=(38.442213, 26.761730, 0.0 m) radius=8000m weather=CLEAR sensors=2
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[94693514] MULTI-1 class=C1 mass=800g pos=(38.489456, 26.761730, 190.0 m)
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[C359F9E2] MULTI-2 class=C1 mass=800g pos=(38.478012, 26.794938, 141.3 m)
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[F2414F67] MULTI-3 class=C0 mass=200g pos=(38.453477, 26.805990, 49.0 m)
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[3643A324] MULTI-4 class=C0 mass=200g pos=(38.426432, 26.823740, 34.5 m)
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[C0BDFBE4] MULTI-5 class=C2 mass=3500g pos=(38.420665, 26.781718, 163.5 m)
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[D6EC4F0A] MULTI-6 class=C3 mass=20000g pos=(38.418967, 26.761730, 94.6 m)
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[23A994E1] MULTI-7 class=C2 mass=3500g pos=(38.417017, 26.738358, 55.3 m)
+2026-02-17 10:13:30.733 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[3A47DE4B] MULTI-8 class=C3 mass=20000g pos=(38.429738, 26.712709, 154.8 m)
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[408B63BC] MULTI-9 class=C0 mass=200g pos=(38.456954, 26.703806, 166.1 m)
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[7EF5F02F] MULTI-10 class=C1 mass=800g pos=(38.474949, 26.731364, 212.3 m)
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated multi-target set: 10 targets
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestScenarioGenerator - Created multi-target scenario: Scenario[SC-002] 'Multi-UAS Simultaneous Detection (10 targets)' targets=10 duration=180s reqs=5
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ╔═══════════════════════════════════════════════════╗
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ║ MULTI-DTI SYSTEM EXECUTION: 8 nodes              ║
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ╚═══════════════════════════════════════════════════╝
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N01 ──
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N01] ═══
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[94693514] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C359F9E2] detected=true latency=0.16s error=10.8m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[F2414F67] detected=true latency=0.11s error=12.3m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3643A324] detected=true latency=0.17s error=4.2m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C0BDFBE4] detected=true latency=0.19s error=5.3m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D6EC4F0A] detected=true latency=0.11s error=17.3m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[23A994E1] detected=true latency=0.22s error=18.2m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3A47DE4B] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[408B63BC] detected=true latency=0.18s error=4.0m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7EF5F02F] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:13:30.736 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[C359F9E2→TRK-C359F9E2] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 10:13:30.738 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[F2414F67→TRK-F2414F67] maintained=false drops=1 meanErr=4.3m points=178
+2026-02-17 10:13:30.740 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[3643A324→TRK-3643A324] maintained=false drops=7 meanErr=3.7m points=174
+2026-02-17 10:13:30.742 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[C0BDFBE4→TRK-C0BDFBE4] maintained=false drops=5 meanErr=3.6m points=173
+2026-02-17 10:13:30.744 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[D6EC4F0A→TRK-D6EC4F0A] maintained=false drops=3 meanErr=3.9m points=177
+2026-02-17 10:13:30.745 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[23A994E1→TRK-23A994E1] maintained=true drops=0 meanErr=3.6m points=181
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[408B63BC→TRK-408B63BC] maintained=false drops=4 meanErr=3.6m points=177
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[C359F9E2] identified=true class=C1 correct=true conf=0.87
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[F2414F67] identified=true class=C0 correct=true conf=0.51
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[3643A324] identified=false class=NOT_IDENTIFIED correct=false conf=0.00
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[C0BDFBE4] identified=true class=UNKNOWN correct=false conf=0.80
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[D6EC4F0A] identified=true class=C3 correct=true conf=0.67
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[23A994E1] identified=true class=C2 correct=true conf=0.89
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[408B63BC] identified=true class=C0 correct=true conf=0.93
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N01] score=58.0 pass=false Pd=0.70 Pt=0.14 Pi=0.86 compliance=0.0% ═══
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N01 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:13:30.747 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N02 ──
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N02] ═══
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[94693514] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C359F9E2] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[F2414F67] detected=true latency=0.28s error=3.7m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3643A324] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C0BDFBE4] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D6EC4F0A] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[23A994E1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3A47DE4B] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[408B63BC] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7EF5F02F] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.748 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[F2414F67→TRK-F2414F67] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[F2414F67] identified=true class=C0 correct=true conf=0.87
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N02] score=34.0 pass=false Pd=0.10 Pt=0.00 Pi=1.00 compliance=0.0% ═══
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N02 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N03 ──
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N03] ═══
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[94693514] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C359F9E2] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[F2414F67] detected=true latency=0.25s error=2.5m
+2026-02-17 10:13:30.750 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3643A324] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.751 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C0BDFBE4] detected=true latency=0.20s error=0.9m
+2026-02-17 10:13:30.751 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D6EC4F0A] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.751 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[23A994E1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.751 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3A47DE4B] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.751 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[408B63BC] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.751 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7EF5F02F] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.751 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:13:30.753 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[F2414F67→TRK-F2414F67] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 10:13:30.755 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[C0BDFBE4→TRK-C0BDFBE4] maintained=false drops=1 meanErr=4.3m points=178
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[F2414F67] identified=true class=C0 correct=true conf=0.87
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[C0BDFBE4] identified=true class=C2 correct=true conf=0.51
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N03] score=38.0 pass=false Pd=0.20 Pt=0.00 Pi=1.00 compliance=0.0% ═══
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N03 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N04 ──
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N04] ═══
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[94693514] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C359F9E2] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[F2414F67] detected=true latency=0.32s error=3.7m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3643A324] detected=true latency=0.17s error=6.0m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C0BDFBE4] detected=true latency=0.17s error=4.8m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D6EC4F0A] detected=true latency=0.19s error=3.3m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[23A994E1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3A47DE4B] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[408B63BC] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7EF5F02F] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.756 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:13:30.758 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[F2414F67→TRK-F2414F67] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 10:13:30.759 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[3643A324→TRK-3643A324] maintained=false drops=1 meanErr=4.3m points=178
+2026-02-17 10:13:30.761 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[C0BDFBE4→TRK-C0BDFBE4] maintained=false drops=7 meanErr=3.7m points=174
+2026-02-17 10:13:30.762 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[D6EC4F0A→TRK-D6EC4F0A] maintained=false drops=5 meanErr=3.6m points=173
+2026-02-17 10:13:30.762 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:13:30.762 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[F2414F67] identified=true class=C0 correct=true conf=0.87
+2026-02-17 10:13:30.762 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[3643A324] identified=true class=C0 correct=true conf=0.51
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[C0BDFBE4] identified=false class=NOT_IDENTIFIED correct=false conf=0.00
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[D6EC4F0A] identified=true class=UNKNOWN correct=false conf=0.80
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N04] score=38.5 pass=false Pd=0.40 Pt=0.00 Pi=0.75 compliance=0.0% ═══
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N04 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N05 ──
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N05] ═══
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[94693514] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C359F9E2] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[F2414F67] detected=true latency=0.40s error=4.9m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3643A324] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C0BDFBE4] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D6EC4F0A] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[23A994E1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3A47DE4B] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[408B63BC] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7EF5F02F] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.763 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[F2414F67→TRK-F2414F67] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[F2414F67] identified=true class=C0 correct=true conf=0.87
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N05] score=34.0 pass=false Pd=0.10 Pt=0.00 Pi=1.00 compliance=0.0% ═══
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N05 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N06 ──
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N06] ═══
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:13:30.765 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[94693514] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C359F9E2] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[F2414F67] detected=true latency=0.84s error=61.3m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3643A324] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C0BDFBE4] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D6EC4F0A] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[23A994E1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3A47DE4B] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[408B63BC] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7EF5F02F] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.766 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[F2414F67→TRK-F2414F67] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[F2414F67] identified=true class=C0 correct=true conf=0.87
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N06] score=34.0 pass=false Pd=0.10 Pt=0.00 Pi=1.00 compliance=0.0% ═══
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N06 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N07 ──
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N07] ═══
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[94693514] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.769 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C359F9E2] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[F2414F67] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3643A324] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C0BDFBE4] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D6EC4F0A] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[23A994E1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3A47DE4B] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[408B63BC] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7EF5F02F] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] WARN  io.github.gcng54.cuaseval.dti.DetectionSystem - False alarm generated: FALSE_ALARM_1
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N07] score=0.0 pass=false Pd=0.00 Pt=0.00 Pi=0.00 compliance=0.0% ═══
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N07 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: N08 ──
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [N08] ═══
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[94693514] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C359F9E2] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[F2414F67] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3643A324] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C0BDFBE4] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D6EC4F0A] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[23A994E1] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[3A47DE4B] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[408B63BC] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7EF5F02F] detected=false latency=0.00s error=0.0m
+2026-02-17 10:13:30.770 [JavaFX Application Thread] WARN  io.github.gcng54.cuaseval.dti.DetectionSystem - False alarm generated: FALSE_ALARM_1
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 10:13:30.770 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 10:13:30.771 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-N08] score=0.0 pass=false Pd=0.00 Pt=0.00 Pi=0.00 compliance=0.0% ═══
+2026-02-17 10:13:30.771 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node N08 → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 10:13:30.771 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ═══ FUSED RESULT: Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f} ═══
+2026-02-17 10:13:30.773 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.evaluator.MetricsCalculator - Computed 21 metrics for scenario SC-002-FUSED
+2026-02-17 10:14:08.120 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:14:08.122 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:19:16.666 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - CUAS-Eval shutting down.
+2026-02-17 10:35:35.410 [main] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Starting CUAS-Eval...
+2026-02-17 10:35:35.812 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╔═══════════════════════════════════════════════════╗
+2026-02-17 10:35:35.813 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║       CUAS-Eval v1.0 — CWA 18150 Evaluator      ║
+2026-02-17 10:35:35.813 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║     Counter-UAS DTI Performance Evaluation       ║
+2026-02-17 10:35:35.813 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╚═══════════════════════════════════════════════════╝
+2026-02-17 10:35:35.843 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Shapefile: type=5, length=1498276 bytes
+2026-02-17 10:35:35.856 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Read 213 shape records from World.shp
+2026-02-17 10:35:36.016 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:35:36.024 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:35:36.157 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:35:36.162 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:35:36.184 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: component-diagram.puml
+2026-02-17 10:35:37.114 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Application started successfully.
+2026-02-17 10:35:37.925 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → component-diagram.png (252940 bytes)
+2026-02-17 10:35:37.926 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: data-model.puml
+2026-02-17 10:35:38.562 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → data-model.png (376304 bytes)
+2026-02-17 10:35:38.563 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: dti-pipeline.puml
+2026-02-17 10:35:39.040 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → dti-pipeline.png (269938 bytes)
+2026-02-17 10:35:39.040 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: requirements-traceability.puml
+2026-02-17 10:35:39.237 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → requirements-traceability.png (114392 bytes)
+2026-02-17 10:35:39.238 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: system-overview.puml
+2026-02-17 10:35:39.504 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → system-overview.png (206003 bytes)
+2026-02-17 10:35:39.505 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: test-evaluation.puml
+2026-02-17 10:35:39.808 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → test-evaluation.png (203855 bytes)
+2026-02-17 10:35:39.810 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - UML rendering complete: 6/6 diagrams rendered to docs\uml_pic
+2026-02-17 10:35:39.811 [uml-auto-render] INFO  io.github.gcng54.cuaseval.ui.MainView - Auto-rendered 6/6 UML diagrams to docs/uml_pic/
+2026-02-17 10:36:11.571 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Need 2 SRTM tiles for boundary (lat=38.4237, lon=27.1428, r=20.0km)
+2026-02-17 10:36:11.572 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Downloading SRTM tile 2/2: https://elevation-tiles-prod.s3.amazonaws.com/skadi/N38/N38E027.hgt.gz → N38E027.hgt
+2026-02-17 10:36:13.833 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM tile N38E027 downloaded OK (25934402 bytes)
+2026-02-17 10:36:13.833 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM download complete: 1 downloaded, 1 skipped, 0 failed
+2026-02-17 10:36:13.835 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 10:36:15.060 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Building DTED cache from resources\srtm → resources\dted\dted_all.dtcache
+2026-02-17 10:36:15.061 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Detected format: .hgt (3601 posts per tile)
+2026-02-17 10:36:15.061 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Found 2 tiles, bounds: lon [26, 27], lat [38, 38]
+2026-02-17 10:36:15.700 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache built: 51863550 bytes (3601 posts), 2 tiles present
+2026-02-17 10:36:16.084 [dted-cache-loader] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache loaded (v2): lon [26, 27], lat [38, 38], 2×1 grid, 3601 posts/tile
+2026-02-17 10:36:16.087 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 10:36:45.610 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - CUAS-Eval shutting down.
+2026-02-17 10:38:55.678 [main] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Starting CUAS-Eval...
+2026-02-17 10:38:56.083 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╔═══════════════════════════════════════════════════╗
+2026-02-17 10:38:56.084 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║       CUAS-Eval v1.0 — CWA 18150 Evaluator      ║
+2026-02-17 10:38:56.084 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║     Counter-UAS DTI Performance Evaluation       ║
+2026-02-17 10:38:56.084 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╚═══════════════════════════════════════════════════╝
+2026-02-17 10:38:56.119 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Shapefile: type=5, length=1498276 bytes
+2026-02-17 10:38:56.132 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Read 213 shape records from World.shp
+2026-02-17 10:38:56.306 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:38:56.314 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:38:56.484 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 10:38:56.490 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 10:38:56.519 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: component-diagram.puml
+2026-02-17 10:38:57.504 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Application started successfully.
+2026-02-17 10:38:58.306 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → component-diagram.png (252942 bytes)
+2026-02-17 10:38:58.307 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: data-model.puml
+2026-02-17 10:38:59.118 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → data-model.png (376309 bytes)
+2026-02-17 10:38:59.119 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: dti-pipeline.puml
+2026-02-17 10:38:59.909 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → dti-pipeline.png (269939 bytes)
+2026-02-17 10:38:59.910 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: requirements-traceability.puml
+2026-02-17 10:39:00.201 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → requirements-traceability.png (114394 bytes)
+2026-02-17 10:39:00.202 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: system-overview.puml
+2026-02-17 10:39:00.642 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → system-overview.png (206005 bytes)
+2026-02-17 10:39:00.642 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: test-evaluation.puml
+2026-02-17 10:39:01.011 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → test-evaluation.png (203858 bytes)
+2026-02-17 10:39:01.015 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - UML rendering complete: 6/6 diagrams rendered to docs\uml_pic
+2026-02-17 10:39:01.016 [uml-auto-render] INFO  io.github.gcng54.cuaseval.ui.MainView - Auto-rendered 6/6 UML diagrams to docs/uml_pic/
+2026-02-17 11:12:50.985 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - CUAS-Eval shutting down.
+2026-02-17 12:03:18.974 [main] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Starting CUAS-Eval...
+2026-02-17 12:03:19.568 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╔═══════════════════════════════════════════════════╗
+2026-02-17 12:03:19.568 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║       CUAS-Eval v1.0 — CWA 18150 Evaluator      ║
+2026-02-17 12:03:19.568 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║     Counter-UAS DTI Performance Evaluation       ║
+2026-02-17 12:03:19.569 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╚═══════════════════════════════════════════════════╝
+2026-02-17 12:03:19.609 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Shapefile: type=5, length=1498276 bytes
+2026-02-17 12:03:19.669 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Read 213 shape records from World.shp
+2026-02-17 12:03:20.006 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 12:03:20.014 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 12:03:20.136 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 12:03:20.143 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 12:03:20.171 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: component-diagram.puml
+2026-02-17 12:03:21.496 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Application started successfully.
+2026-02-17 12:03:22.655 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → component-diagram.png (387888 bytes)
+2026-02-17 12:03:22.656 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: data-model.puml
+2026-02-17 12:03:24.283 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → data-model.png (716424 bytes)
+2026-02-17 12:03:24.284 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: dti-pipeline.puml
+2026-02-17 12:03:24.999 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → dti-pipeline.png (269939 bytes)
+2026-02-17 12:03:25.000 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: requirements-traceability.puml
+2026-02-17 12:03:25.270 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → requirements-traceability.png (114394 bytes)
+2026-02-17 12:03:25.271 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: system-overview.puml
+2026-02-17 12:03:25.631 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → system-overview.png (206005 bytes)
+2026-02-17 12:03:25.632 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: test-evaluation.puml
+2026-02-17 12:03:26.073 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → test-evaluation.png (203858 bytes)
+2026-02-17 12:03:26.076 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - UML rendering complete: 6/6 diagrams rendered to docs\uml_pic
+2026-02-17 12:03:26.077 [uml-auto-render] INFO  io.github.gcng54.cuaseval.ui.MainView - Auto-rendered 6/6 UML diagrams to docs/uml_pic/
+2026-02-17 12:04:18.742 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Need 2 SRTM tiles for boundary (lat=38.400938, lon=26.774879, r=21.5km)
+2026-02-17 12:04:18.743 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM download complete: 0 downloaded, 2 skipped, 0 failed
+2026-02-17 12:04:18.745 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:04:28.648 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Need 2 SRTM tiles for boundary (lat=38.400938, lon=26.774879, r=21.5km)
+2026-02-17 12:04:28.649 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM download complete: 0 downloaded, 2 skipped, 0 failed
+2026-02-17 12:04:28.649 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:04:32.142 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Building DTED cache from resources\srtm → resources\dted\dted_all.dtcache
+2026-02-17 12:04:32.143 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Detected format: .hgt (3601 posts per tile)
+2026-02-17 12:04:32.143 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Found 2 tiles, bounds: lon [26, 27], lat [38, 38]
+2026-02-17 12:04:33.589 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache built: 51863550 bytes (3601 posts), 2 tiles present
+2026-02-17 12:04:34.059 [dted-cache-loader] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache loaded (v2): lon [26, 27], lat [38, 38], 2×1 grid, 3601 posts/tile
+2026-02-17 12:04:34.066 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:05:44.548 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 12:05:44.550 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 12:05:44.552 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestEnvironmentDesigner - Created open-field environment: Env[Multi-Target Test] centre=(38.423700, 27.142800, 0.0 m) radius=8000m weather=CLEAR ew=NONE sensors=2
+2026-02-17 12:05:44.554 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[9D92B6FE] MULTI-1 class=C0 mass=200g pos=(38.476392, 27.142800, 25.5 m)
+2026-02-17 12:05:44.554 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[BC8E8A14] MULTI-2 class=C2 mass=3500g pos=(38.451714, 27.168780, 67.4 m)
+2026-02-17 12:05:44.554 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[D429052D] MULTI-3 class=C2 mass=3500g pos=(38.436854, 27.194476, 77.4 m)
+2026-02-17 12:05:44.554 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[EE25C1D4] MULTI-4 class=C2 mass=3500g pos=(38.411500, 27.190728, 89.6 m)
+2026-02-17 12:05:44.555 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[74F0DCA9] MULTI-5 class=C2 mass=3500g pos=(38.389881, 27.174163, 58.9 m)
+2026-02-17 12:05:44.555 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[02A1B0EA] MULTI-6 class=C3 mass=20000g pos=(38.364933, 27.142800, 102.6 m)
+2026-02-17 12:05:44.555 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[30706D19] MULTI-7 class=C2 mass=3500g pos=(38.396256, 27.117349, 201.7 m)
+2026-02-17 12:05:44.555 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[DD0DB831] MULTI-8 class=C2 mass=3500g pos=(38.413931, 27.104424, 104.3 m)
+2026-02-17 12:05:44.556 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[2BBF1E67] MULTI-9 class=C1 mass=800g pos=(38.436358, 27.093074, 148.0 m)
+2026-02-17 12:05:44.556 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[CA4A5D8F] MULTI-10 class=C3 mass=20000g pos=(38.465327, 27.104196, 214.5 m)
+2026-02-17 12:05:44.556 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated multi-target set: 10 targets
+2026-02-17 12:05:44.557 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestScenarioGenerator - Created multi-target scenario: Scenario[SC-002] 'Multi-UAS Simultaneous Detection (10 targets)' targets=10 duration=180s reqs=5
+2026-02-17 12:05:44.558 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator - ╔══════════════════════════════════════════════╗
+2026-02-17 12:05:44.558 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator - ║ EVALUATING: Multi-UAS Simultaneous Detection (10 targets) 
+2026-02-17 12:05:44.558 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator - ╚══════════════════════════════════════════════╝
+2026-02-17 12:05:44.558 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) ═══
+2026-02-17 12:05:44.558 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 12:05:44.559 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[9D92B6FE] detected=false latency=0.00s error=0.0m
+2026-02-17 12:05:44.559 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[BC8E8A14] detected=false latency=0.00s error=0.0m
+2026-02-17 12:05:44.560 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[D429052D] detected=false latency=0.00s error=0.0m
+2026-02-17 12:05:44.560 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[EE25C1D4] detected=true latency=0.14s error=9.4m
+2026-02-17 12:05:44.560 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[74F0DCA9] detected=false latency=0.00s error=0.0m
+2026-02-17 12:05:44.560 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[02A1B0EA] detected=false latency=0.00s error=0.0m
+2026-02-17 12:05:44.560 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[30706D19] detected=false latency=0.00s error=0.0m
+2026-02-17 12:05:44.560 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[DD0DB831] detected=false latency=0.00s error=0.0m
+2026-02-17 12:05:44.560 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[2BBF1E67] detected=false latency=0.00s error=0.0m
+2026-02-17 12:05:44.561 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[CA4A5D8F] detected=true latency=0.17s error=9.0m
+2026-02-17 12:05:44.561 [JavaFX Application Thread] WARN  io.github.gcng54.cuaseval.dti.DetectionSystem - False alarm generated: FALSE_ALARM_1
+2026-02-17 12:05:44.561 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 12:05:44.566 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[EE25C1D4→TRK-EE25C1D4] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 12:05:44.568 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[CA4A5D8F→TRK-CA4A5D8F] maintained=false drops=1 meanErr=4.3m points=178
+2026-02-17 12:05:44.569 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 12:05:44.570 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[EE25C1D4] identified=true class=C2 correct=true conf=0.87
+2026-02-17 12:05:44.570 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[CA4A5D8F] identified=true class=C3 correct=true conf=0.51
+2026-02-17 12:05:44.577 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002] score=38.0 pass=false Pd=0.20 Pt=0.00 Pi=1.00 compliance=0.0% ═══
+2026-02-17 12:05:44.577 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR02 — FAIL
+2026-02-17 12:05:44.577 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR05 — PASS
+2026-02-17 12:05:44.577 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR07 — PASS
+2026-02-17 12:05:44.577 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR22 — PASS
+2026-02-17 12:05:44.577 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR24 — PASS
+2026-02-17 12:05:44.578 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator - RESULT: FAIL (score={:.1f}, compliance={:.1f}%)
+2026-02-17 12:05:44.603 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.evaluator.MetricsCalculator - Computed 21 metrics for scenario SC-002
+2026-02-17 12:05:58.520 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Need 2 SRTM tiles for boundary (lat=38.4237, lon=27.1428, r=12.7km)
+2026-02-17 12:05:58.521 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM download complete: 0 downloaded, 2 skipped, 0 failed
+2026-02-17 12:05:58.521 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:06:01.584 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Building DTED cache from resources\srtm → resources\dted\dted_all.dtcache
+2026-02-17 12:06:01.585 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Detected format: .hgt (3601 posts per tile)
+2026-02-17 12:06:01.585 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Found 2 tiles, bounds: lon [26, 27], lat [38, 38]
+2026-02-17 12:06:02.385 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache built: 51863550 bytes (3601 posts), 2 tiles present
+2026-02-17 12:06:02.824 [dted-cache-loader] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache loaded (v2): lon [26, 27], lat [38, 38], 2×1 grid, 3601 posts/tile
+2026-02-17 12:06:02.826 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:06:32.107 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.ui.MainView - Add-node requested at (38.41259040811144, 27.167026406405576)
+2026-02-17 12:06:32.109 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.ui.MainView - Added manual sensor site at (38.41259040811144, 27.167026406405576)
+2026-02-17 12:07:02.277 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - Added DTI node: Node[Radar] Compact Surveillance Radar @ (38.423700, 27.142800, 0.0 m) sensor=Compact Surveillance Radar
+2026-02-17 12:07:32.718 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 12:07:32.720 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 12:07:32.721 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestEnvironmentDesigner - Created open-field environment: Env[Multi-Target Test] centre=(38.423700, 27.142800, 0.0 m) radius=8000m weather=CLEAR ew=NONE sensors=2
+2026-02-17 12:07:32.721 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[7F9CBE85] MULTI-1 class=C1 mass=800g pos=(38.470943, 27.142800, 190.0 m)
+2026-02-17 12:07:32.721 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[33803A26] MULTI-2 class=C1 mass=800g pos=(38.459499, 27.175999, 141.3 m)
+2026-02-17 12:07:32.722 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[97823F64] MULTI-3 class=C0 mass=200g pos=(38.434964, 27.187049, 49.0 m)
+2026-02-17 12:07:32.722 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[CABB6FE4] MULTI-4 class=C0 mass=200g pos=(38.407919, 27.204794, 34.5 m)
+2026-02-17 12:07:32.722 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[A1382830] MULTI-5 class=C2 mass=3500g pos=(38.402152, 27.162783, 163.5 m)
+2026-02-17 12:07:32.722 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[63F3A3B3] MULTI-6 class=C3 mass=20000g pos=(38.400454, 27.142800, 94.6 m)
+2026-02-17 12:07:32.722 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[A05B5F84] MULTI-7 class=C2 mass=3500g pos=(38.398504, 27.119434, 55.3 m)
+2026-02-17 12:07:32.722 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[4C910F14] MULTI-8 class=C3 mass=20000g pos=(38.411225, 27.093791, 154.8 m)
+2026-02-17 12:07:32.723 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[C9C499D0] MULTI-9 class=C0 mass=200g pos=(38.438441, 27.084891, 166.1 m)
+2026-02-17 12:07:32.723 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[E143857D] MULTI-10 class=C1 mass=800g pos=(38.456436, 27.112442, 212.3 m)
+2026-02-17 12:07:32.723 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated multi-target set: 10 targets
+2026-02-17 12:07:32.723 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestScenarioGenerator - Created multi-target scenario: Scenario[SC-002] 'Multi-UAS Simultaneous Detection (10 targets)' targets=10 duration=180s reqs=5
+2026-02-17 12:07:32.723 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ╔═══════════════════════════════════════════════════╗
+2026-02-17 12:07:32.723 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ║ MULTI-DTI SYSTEM EXECUTION: 1 nodes              ║
+2026-02-17 12:07:32.723 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ╚═══════════════════════════════════════════════════╝
+2026-02-17 12:07:32.724 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ── Evaluating node: Radar ──
+2026-02-17 12:07:32.724 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (10 targets) [Radar] ═══
+2026-02-17 12:07:32.724 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 12:07:32.724 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[7F9CBE85] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.725 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[33803A26] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.725 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[97823F64] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.725 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[CABB6FE4] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.725 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[A1382830] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.725 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[63F3A3B3] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.725 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[A05B5F84] detected=true latency=0.31s error=1.7m
+2026-02-17 12:07:32.726 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[4C910F14] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.726 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C9C499D0] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.726 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[E143857D] detected=false latency=0.00s error=0.0m
+2026-02-17 12:07:32.726 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 12:07:32.728 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[A05B5F84→TRK-A05B5F84] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 12:07:32.734 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 12:07:32.735 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[A05B5F84] identified=true class=C2 correct=true conf=0.87
+2026-02-17 12:07:32.735 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002-Radar] score=34.0 pass=false Pd=0.10 Pt=0.00 Pi=1.00 compliance=0.0% ═══
+2026-02-17 12:07:32.736 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem -   Node Radar → Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f}
+2026-02-17 12:07:32.746 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.MultiDtiSystem - ═══ FUSED RESULT: Pd={:.3f} cont={:.3f} Pi={:.3f} score={:.1f} ═══
+2026-02-17 12:07:32.748 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.evaluator.MetricsCalculator - Computed 21 metrics for scenario SC-002-FUSED
+2026-02-17 12:08:20.825 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - CUAS-Eval shutting down.
+2026-02-17 12:08:51.823 [main] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Starting CUAS-Eval...
+2026-02-17 12:08:52.243 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╔═══════════════════════════════════════════════════╗
+2026-02-17 12:08:52.243 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║       CUAS-Eval v1.0 — CWA 18150 Evaluator      ║
+2026-02-17 12:08:52.243 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ║     Counter-UAS DTI Performance Evaluation       ║
+2026-02-17 12:08:52.243 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - ╚═══════════════════════════════════════════════════╝
+2026-02-17 12:08:52.293 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Shapefile: type=5, length=1498276 bytes
+2026-02-17 12:08:52.309 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.ShapefileReader - Read 213 shape records from World.shp
+2026-02-17 12:08:52.638 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 12:08:52.646 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 12:08:52.733 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 12:08:52.737 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 12:08:52.758 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: component-diagram.puml
+2026-02-17 12:08:53.690 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - Application started successfully.
+2026-02-17 12:08:54.497 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → component-diagram.png (387888 bytes)
+2026-02-17 12:08:54.498 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: data-model.puml
+2026-02-17 12:08:55.531 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → data-model.png (716424 bytes)
+2026-02-17 12:08:55.532 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: dti-pipeline.puml
+2026-02-17 12:08:56.100 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → dti-pipeline.png (269939 bytes)
+2026-02-17 12:08:56.100 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: requirements-traceability.puml
+2026-02-17 12:08:56.312 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → requirements-traceability.png (114394 bytes)
+2026-02-17 12:08:56.312 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: system-overview.puml
+2026-02-17 12:08:56.604 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → system-overview.png (206005 bytes)
+2026-02-17 12:08:56.605 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - Rendering UML diagram: test-evaluation.puml
+2026-02-17 12:08:56.907 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer -   → test-evaluation.png (203858 bytes)
+2026-02-17 12:08:56.908 [uml-auto-render] INFO  io.github.gcng54.cuaseval.report.UmlRenderer - UML rendering complete: 6/6 diagrams rendered to docs\uml_pic
+2026-02-17 12:08:56.909 [uml-auto-render] INFO  io.github.gcng54.cuaseval.ui.MainView - Auto-rendered 6/6 UML diagrams to docs/uml_pic/
+2026-02-17 12:09:07.965 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 75 requirements (10 links)
+2026-02-17 12:09:07.967 [JavaFX Application Thread] INFO  i.g.g.cuaseval.requirements.RequirementsManager - Loaded 73 scenario requirements, 10 scenario definitions, 10 scenario links
+2026-02-17 12:09:07.969 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestEnvironmentDesigner - Created open-field environment: Env[Multi-Target Test] centre=(38.423700, 27.142800, 0.0 m) radius=8000m weather=CLEAR ew=NONE sensors=2
+2026-02-17 12:09:07.971 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[B9BFCA5A] MULTI-1 class=C0 mass=200g pos=(38.476392, 27.142800, 25.5 m)
+2026-02-17 12:09:07.971 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[484D98A1] MULTI-2 class=C2 mass=3500g pos=(38.448185, 27.174054, 67.4 m)
+2026-02-17 12:09:07.972 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[C7717CB0] MULTI-3 class=C2 mass=3500g pos=(38.423700, 27.197135, 77.4 m)
+2026-02-17 12:09:07.972 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[6D89ACE5] MULTI-4 class=C2 mass=3500g pos=(38.395783, 27.178434, 89.6 m)
+2026-02-17 12:09:07.972 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[597DB8BA] MULTI-5 class=C2 mass=3500g pos=(38.381897, 27.142800, 58.9 m)
+2026-02-17 12:09:07.972 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[97C38B42] MULTI-6 class=C3 mass=20000g pos=(38.382146, 27.089759, 102.6 m)
+2026-02-17 12:09:07.972 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[279B1807] MULTI-7 class=C2 mass=3500g pos=(38.423700, 27.099500, 201.7 m)
+2026-02-17 12:09:07.973 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated target: UAS[923A2A70] MULTI-8 class=C2 mass=3500g pos=(38.446053, 27.114268, 104.3 m)
+2026-02-17 12:09:07.973 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.generator.TestTargetGenerator - Generated multi-target set: 8 targets
+2026-02-17 12:09:07.974 [JavaFX Application Thread] INFO  i.g.g.cuaseval.generator.TestScenarioGenerator - Created multi-target scenario: Scenario[SC-002] 'Multi-UAS Simultaneous Detection (8 targets)' targets=8 duration=180s reqs=5
+2026-02-17 12:09:07.974 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator - ╔══════════════════════════════════════════════╗
+2026-02-17 12:09:07.974 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator - ║ EVALUATING: Multi-UAS Simultaneous Detection (8 targets) 
+2026-02-17 12:09:07.974 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator - ╚══════════════════════════════════════════════╝
+2026-02-17 12:09:07.974 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline START: Multi-UAS Simultaneous Detection (8 targets) ═══
+2026-02-17 12:09:07.975 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 1: Detection ──
+2026-02-17 12:09:07.976 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[B9BFCA5A] detected=false latency=0.00s error=0.0m
+2026-02-17 12:09:07.976 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[484D98A1] detected=false latency=0.00s error=0.0m
+2026-02-17 12:09:07.976 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[C7717CB0] detected=false latency=0.00s error=0.0m
+2026-02-17 12:09:07.976 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[6D89ACE5] detected=true latency=0.14s error=9.4m
+2026-02-17 12:09:07.976 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[597DB8BA] detected=false latency=0.00s error=0.0m
+2026-02-17 12:09:07.976 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[97C38B42] detected=false latency=0.00s error=0.0m
+2026-02-17 12:09:07.977 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[279B1807] detected=false latency=0.00s error=0.0m
+2026-02-17 12:09:07.977 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DetectionSystem - Detection: Detection[923A2A70] detected=false latency=0.00s error=0.0m
+2026-02-17 12:09:07.977 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 2: Tracking ──
+2026-02-17 12:09:07.981 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.TrackingSystem - Tracking: Track[6D89ACE5→TRK-6D89ACE5] maintained=false drops=1 meanErr=3.8m points=179
+2026-02-17 12:09:07.982 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ── Phase 3: Identification ──
+2026-02-17 12:09:07.983 [JavaFX Application Thread] INFO  i.github.gcng54.cuaseval.dti.IdentificationSystem - Identification: ID[6D89ACE5] identified=true class=C2 correct=true conf=0.87
+2026-02-17 12:09:07.987 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.dti.DtiPipeline - ═══ DTI Pipeline COMPLETE: Eval[SC-002] score=35.0 pass=false Pd=0.13 Pt=0.00 Pi=1.00 compliance=0.0% ═══
+2026-02-17 12:09:07.987 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR02 — FAIL
+2026-02-17 12:09:07.987 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR05 — PASS
+2026-02-17 12:09:07.987 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR07 — PASS
+2026-02-17 12:09:07.988 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR22 — PASS
+2026-02-17 12:09:07.988 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator -   Requirement FR24 — PASS
+2026-02-17 12:09:07.988 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.evaluator.TestEvaluator - RESULT: FAIL (score={:.1f}, compliance={:.1f}%)
+2026-02-17 12:09:08.010 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.evaluator.MetricsCalculator - Computed 21 metrics for scenario SC-002
+2026-02-17 12:09:24.642 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Need 1 SRTM tiles for boundary (lat=38.419559, lon=27.144824, r=7.9km)
+2026-02-17 12:09:24.643 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM download complete: 0 downloaded, 1 skipped, 0 failed
+2026-02-17 12:09:24.647 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:09:26.189 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Building DTED cache from resources\srtm → resources\dted\dted_all.dtcache
+2026-02-17 12:09:26.190 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Detected format: .hgt (3601 posts per tile)
+2026-02-17 12:09:26.190 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Found 2 tiles, bounds: lon [26, 27], lat [38, 38]
+2026-02-17 12:09:27.154 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache built: 51863550 bytes (3601 posts), 2 tiles present
+2026-02-17 12:09:27.559 [dted-cache-loader] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache loaded (v2): lon [26, 27], lat [38, 38], 2×1 grid, 3601 posts/tile
+2026-02-17 12:09:27.561 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:09:47.880 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.ui.MainView - Add-node requested at (38.419231138984514, 27.161531032279363)
+2026-02-17 12:09:47.882 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.ui.MainView - Added manual sensor site at (38.419231138984514, 27.161531032279363)
+2026-02-17 12:10:18.112 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - Need 1 SRTM tiles for boundary (lat=38.421816, lon=27.143022, r=11.2km)
+2026-02-17 12:10:18.112 [srtm-downloader] INFO  io.github.gcng54.cuaseval.terrain.SrtmDownloader - SRTM download complete: 0 downloaded, 1 skipped, 0 failed
+2026-02-17 12:10:18.112 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:10:23.515 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Building DTED cache from resources\srtm → resources\dted\dted_all.dtcache
+2026-02-17 12:10:23.516 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Detected format: .hgt (3601 posts per tile)
+2026-02-17 12:10:23.516 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - Found 2 tiles, bounds: lon [26, 27], lat [38, 38]
+2026-02-17 12:10:24.292 [dted-cache-builder] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache built: 51863550 bytes (3601 posts), 2 tiles present
+2026-02-17 12:10:24.701 [dted-cache-loader] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - DTED cache loaded (v2): lon [26, 27], lat [38, 38], 2×1 grid, 3601 posts/tile
+2026-02-17 12:10:24.708 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.terrain.DtedReader - SRTM directory set: resources\srtm
+2026-02-17 12:12:26.506 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.evaluator.MetricsCalculator - Computed 21 metrics for scenario SC-002
+2026-02-17 12:12:26.508 [JavaFX Application Thread] INFO  i.g.gcng54.cuaseval.report.TestReportGenerator - HTML report exported to: D:\PROJECTS\CUAS-Eval\html_files\cuas_eval_report.html
+2026-02-17 12:13:48.567 [JavaFX Application Thread] INFO  io.github.gcng54.cuaseval.CuasEvalApp - CUAS-Eval shutting down.

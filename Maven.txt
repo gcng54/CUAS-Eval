@@ -1,0 +1,5 @@
+<dependency>
+    <groupId>io.github.gcng54</groupId>
+    <artifactId>cuas-eval</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>

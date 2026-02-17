@@ -1,0 +1,88 @@
+@startuml requirements-traceability
+!theme cerulean
+title CWA 18150 Requirements Traceability Matrix\nRequirement → Component Mapping
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #1565C0
+    HeaderBackgroundColor #E3F2FD
+}
+
+package "Functional Requirements" #E8F5E9 {
+    class "FR01: Detect UAS" as FR01
+    class "FR02: Detect multiple" as FR02
+    class "FR04: Track UAS" as FR04
+    class "FR06: Identify UAS" as FR06
+    class "FR09: C1 (<900g)" as FR09
+    class "FR13: Data fusion" as FR13
+    class "FR14: IFF" as FR14
+    class "FR15: Bird immunity" as FR15
+    class "FR17: UID" as FR17
+    class "FR18: Track after loss" as FR18
+    class "FR20: Payload type" as FR20
+    class "FR25: Simulator" as FR25
+}
+
+package "Performance Requirements" #FFF3E0 {
+    class "PR08: Weather resist" as PR08
+    class "PR09: No missed det" as PR09
+    class "PR13: Night ID" as PR13
+    class "PR14: Fog ID" as PR14
+    class "PR19: Multi-track" as PR19
+    class "PR20: Precise pos" as PR20
+}
+
+package "Testable Parameters" #FCE4EC {
+    class "TP_D01: Det time" as TPD01
+    class "TP_D02: Display lat" as TPD02
+    class "TP_D04: Bird class" as TPD04
+    class "TP_D16: Refresh rate" as TPD16
+    class "TP_I01: UAS size" as TPI01
+    class "TP_I08: UAS class" as TPI08
+    class "TP_T05: Path vis" as TPT05
+}
+
+package "Implementation Components" #E3F2FD {
+    class "DetectionSystem" as DET
+    class "TrackingSystem" as TRK
+    class "IdentificationSystem" as ID
+    class "TestTargetGenerator" as GEN
+    class "TestScenarioGenerator" as SCEN
+    class "MetricsCalculator" as MET
+    class "KmlExporter" as KML
+}
+
+' Detection mappings
+FR01 --> DET
+FR02 --> DET
+FR09 --> GEN
+FR15 --> DET
+PR08 --> DET
+PR09 --> DET
+TPD01 --> DET
+TPD02 --> DET
+TPD04 --> DET
+
+' Tracking mappings
+FR04 --> TRK
+FR17 --> TRK
+FR18 --> TRK
+PR19 --> TRK
+PR20 --> TRK
+TPD16 --> TRK
+TPT05 --> KML
+
+' Identification mappings
+FR06 --> ID
+FR14 --> ID
+FR20 --> ID
+PR13 --> ID
+PR14 --> ID
+TPI01 --> ID
+TPI08 --> ID
+
+' Cross-cutting
+FR13 --> MET
+FR25 --> SCEN
+
+@enduml

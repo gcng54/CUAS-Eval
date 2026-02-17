@@ -1,0 +1,228 @@
+/* CUAS-Eval Main Stylesheet */
+
+/* Root colors */
+.root {
+    -fx-base: #2b2b2b;
+    -fx-background: #1e1e1e;
+    -fx-control-inner-background: #2b2b2b;
+    -fx-accent: #1565C0;
+    -fx-focus-color: #1976D2;
+    -fx-faint-focus-color: transparent;
+    -fx-text-fill: #d4d4d4;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* Menu bar */
+.menu-bar {
+    -fx-background-color: #2d2d2d;
+    -fx-border-color: transparent transparent #3d3d3d transparent;
+}
+
+.menu-bar .menu {
+    -fx-text-fill: #cccccc;
+}
+
+.menu-bar .menu:hover,
+.menu-bar .menu:focused {
+    -fx-background-color: #3e3e3e;
+}
+
+/* Tabs */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #252526;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #2d2d2d;
+    -fx-border-color: transparent;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: transparent transparent #1565C0 transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #999999;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #ffffff;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #0e639c;
+    -fx-text-fill: white;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #1177bb;
+}
+
+.button:pressed {
+    -fx-background-color: #0d5689;
+}
+
+.button:disabled {
+    -fx-background-color: #3a3a3a;
+    -fx-text-fill: #666666;
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #d4d4d4;
+}
+
+.label.header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Text fields */
+.text-field, .text-area {
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: #d4d4d4;
+    -fx-border-color: #555555;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-prompt-text-fill: #888888;
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-border-color: #1565C0;
+}
+
+/* Combo boxes */
+.combo-box {
+    -fx-background-color: #3c3c3c;
+    -fx-border-color: #555555;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #d4d4d4;
+    -fx-background-color: #3c3c3c;
+}
+
+/* Tables */
+.table-view {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #3d3d3d;
+}
+
+.table-view .column-header {
+    -fx-background-color: #2d2d2d;
+    -fx-border-color: #3d3d3d;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #cccccc;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: transparent transparent #2d2d2d transparent;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #252526;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #264f78;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #d4d4d4;
+}
+
+/* Scroll bars */
+.scroll-bar {
+    -fx-background-color: #1e1e1e;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #424242;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #555555;
+}
+
+/* Split pane */
+.split-pane {
+    -fx-background-color: #1e1e1e;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-background-color: #3d3d3d;
+    -fx-padding: 0 1 0 1;
+}
+
+/* Status bar */
+.status-bar {
+    -fx-background-color: #007acc;
+    -fx-padding: 2 8 2 8;
+}
+
+.status-bar .label {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+/* Progress indicators */
+.progress-bar {
+    -fx-accent: #1565C0;
+}
+
+.progress-bar .track {
+    -fx-background-color: #3c3c3c;
+}
+
+/* Map view */
+.map-canvas {
+    -fx-background-color: #0a1929;
+}
+
+/* Evaluation result styling */
+.pass-label {
+    -fx-text-fill: #4caf50;
+    -fx-font-weight: bold;
+}
+
+.fail-label {
+    -fx-text-fill: #f44336;
+    -fx-font-weight: bold;
+}
+
+.partial-label {
+    -fx-text-fill: #ff9800;
+    -fx-font-weight: bold;
+}
+
+/* Log area */
+.log-area {
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-font-size: 12px;
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #cccccc;
+}
+
+/* Tooltip */
+.tooltip {
+    -fx-background-color: #2d2d2d;
+    -fx-text-fill: #d4d4d4;
+    -fx-border-color: #555555;
+    -fx-font-size: 12px;
+}

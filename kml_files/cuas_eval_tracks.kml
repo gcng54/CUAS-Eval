@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>CUAS-Eval: S1: Prison — Contraband Delivery Defence</name>
+  <description>CWA 18150 Test Evaluation — Track2KML Export</description>
+  <Style id="target">
+    <IconStyle><color>ff0000ff</color><scale>1.2</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/shapes/triangle.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="sensor">
+    <IconStyle><color>ff00ff00</color><scale>1.0</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/shapes/square.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="detection">
+    <IconStyle><color>ff00ffff</color><scale>0.8</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/shapes/star.png</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="flightpath">
+    <LineStyle><color>ff0000ff</color><width>3</width></LineStyle>
+  </Style>
+  <Style id="trackpath">
+    <LineStyle><color>ffff0000</color><width>2</width></LineStyle>
+  </Style>
+  <Folder>
+    <name>Test Environment</name>
+    <Placemark>
+      <name>Observation Centre</name>
+      <description>Centre of observation area. Radius: 3000.0 m</description>
+      <styleUrl>#sensor</styleUrl>
+      <Point>
+        <altitudeMode>absolute</altitudeMode>
+        <coordinates>2.35220000,48.85660000,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>RADAR-01 (RADAR)</name>
+      <description>Max range: 3600.0 m</description>
+      <styleUrl>#sensor</styleUrl>
+      <Point>
+        <altitudeMode>absolute</altitudeMode>
+        <coordinates>2.35220000,48.85660000,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>EOIR-01 (EO/IR)</name>
+      <description>Max range: 2400.0 m</description>
+      <styleUrl>#sensor</styleUrl>
+      <Point>
+        <altitudeMode>absolute</altitudeMode>
+        <coordinates>2.35320000,48.85760000,0.0</coordinates>
+      </Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>Flight Paths (Ground Truth)</name>
+    <Placemark>
+      <name>Path: DAED18B4</name>
+      <styleUrl>#flightpath</styleUrl>
+      <LineString>
+        <altitudeMode>absolute</altitudeMode>
+        <coordinates>
+          2.37633580,48.87248005,40.0
+          2.35220000,48.85839662,0.0
+          2.35220000,48.85660000,0.0
+          2.32516791,48.83881435,0.0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>Detection Events</name>
+  </Folder>
+  <Folder>
+    <name>Tracking Data</name>
+  </Folder>
+</Document>
+</kml>

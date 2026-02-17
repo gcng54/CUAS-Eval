@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build CUAS-Eval",
+            "type": "shell",
+            "command": "mvnw.cmd clean package",
+            "group": "build",
+            "problemMatcher": ["$javac"],
+            "windows": {
+                "command": "mvnw.cmd clean package"
+            },
+            "linux": {
+                "command": "./mvnw clean package"
+            },
+            "osx": {
+                "command": "./mvnw clean package"
+            }
+        }
+    ]
+}

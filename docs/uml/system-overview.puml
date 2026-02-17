@@ -1,0 +1,113 @@
+@startuml system-overview
+!theme cerulean
+title CUAS-Eval System Overview\nCWA 18150 Counter-UAS Evaluation Pipeline
+
+skinparam packageStyle rectangle
+skinparam component {
+    BackgroundColor<<pipeline>> #E3F2FD
+    BackgroundColor<<generator>> #E8F5E9
+    BackgroundColor<<evaluator>> #FFF3E0
+    BackgroundColor<<report>> #FCE4EC
+    BackgroundColor<<ui>> #F3E5F5
+}
+
+package "CUAS-Eval Application" {
+
+    package "UI Layer (JavaFX)" <<ui>> {
+        [CuasEvalApp] as app
+        [MainView] as mainview
+        [MapView] as mapview
+        [ScenarioPanel] as scenPanel
+        [EvaluationPanel] as evalPanel
+        [ReportPanel] as repPanel
+    }
+
+    package "Generator Layer" <<generator>> {
+        [TestTargetGenerator] as targetGen
+        [TestEnvironmentDesigner] as envDesigner
+        [TestScenarioGenerator] as scenarioGen
+    }
+
+    package "DTI Pipeline" <<pipeline>> {
+        [DtiPipeline] as dtiPipeline
+        [DetectionSystem] as detSys
+        [TrackingSystem] as trkSys
+        [IdentificationSystem] as idSys
+        [MultiDtiSystem] as multiDti
+    }
+
+    package "Evaluator Layer" <<evaluator>> {
+        [TestEvaluator] as testEval
+        [EvaluationCriteria] as criteria
+        [MetricsCalculator] as metrics
+    }
+
+    package "Report Layer" <<report>> {
+        [TestReportGenerator] as reportGen
+        [KmlExporter] as kmlExp
+    }
+
+    package "Requirements" {
+        [RequirementsManager] as reqMgr
+        database "coutrage_requirements.json" as reqJson
+    }
+
+    package "Domain Model" {
+        [TestScenario]
+        [TestEnvironment]
+        [UasTarget]
+        [EvaluationResult]
+        [DetectionResult]
+        [TrackingResult]
+        [IdentificationResult]
+        [GeoPosition]
+        [Requirement]
+        [CuasSensor]
+        [SensorLibrary]
+    }
+}
+
+' UI wiring
+app --> mainview
+mainview --> mapview
+mainview --> scenPanel
+mainview --> evalPanel
+mainview --> repPanel
+
+' Sensor configuration flow
+note right of mainview
+  SensorPanel → configure DTI nodes
+  MultiDtiSystem → fused evaluation
+end note
+
+' Scenario generation flow
+scenPanel --> scenarioGen
+scenarioGen --> targetGen
+scenarioGen --> envDesigner
+
+' Evaluation flow
+scenPanel --> testEval
+scenPanel --> multiDti : "multi-DTI execution"
+testEval --> dtiPipeline
+multiDti --> dtiPipeline : "N × pipelines"
+dtiPipeline --> detSys
+dtiPipeline --> trkSys
+dtiPipeline --> idSys
+testEval --> criteria
+testEval --> metrics
+
+' Results flow
+testEval --> evalPanel
+testEval --> mapview
+testEval --> repPanel
+
+' Report export
+repPanel --> reportGen
+repPanel --> kmlExp
+
+' Requirements
+reqMgr --> reqJson
+testEval --> reqMgr
+criteria --> reqMgr
+
+@enduml

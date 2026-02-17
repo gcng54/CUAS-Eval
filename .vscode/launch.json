@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launcher",
+            "request": "launch",
+            "mainClass": "io.github.gcng54.cuaseval.Launcher",
+            "projectName": "cuas-eval"
+        },
+        {
+            "type": "java",
+            "name": "Run CUAS-EvalApp",
+            "request": "launch",
+            "mainClass": "io.github.gcng54.cuaseval.CuasEvalApp",
+            "projectName": "cuas-eval",
+            "console": "internalConsole"
+        }
+    ]
+}

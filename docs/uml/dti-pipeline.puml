@@ -1,0 +1,91 @@
+@startuml dti-pipeline
+!theme cerulean
+title DTI Pipeline — Detection, Tracking, Identification\nCWA 18150 Integrated Evaluation Flow
+
+skinparam activity {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+}
+
+|DtiPipeline|
+start
+:Receive **TestScenario**;
+note right
+  Scenario includes:
+  - TestEnvironment (sensors, terrain, weather)
+  - UasTarget list (targets with positions, classes)
+  - FlightPlan list (waypoints, speeds)
+  - Linked requirement IDs
+end note
+
+|DetectionSystem|
+:Phase 1: **Detection**;
+:Iterate over all targets;
+repeat
+  :Evaluate target against each sensor;
+  if (CuasSensor template?) then (yes)
+    :Sensor-specific Pd model;
+    :Range/RCS/weather from template;
+  else (no)
+    :Generic Pd (basePd, range²);
+  endif
+  :Compute **Pd** (range, RCS, weather);
+  :Stochastic detection decision;
+  if (Detected?) then (yes)
+    :Compute latency (TP_D01);
+    :Compute position with noise (TP_D03);
+    :Compute display latency (TP_D02);
+    :→ DetectionResult (detected=true);
+  else (no)
+    :→ DetectionResult (detected=false);
+  endif
+repeat while (more targets?)
+
+:Generate false alarms (FR15);
+:→ List<DetectionResult>;
+
+|TrackingSystem|
+:Phase 2: **Tracking**;
+:Filter detected targets;
+repeat
+  :Initialize track (FR17: UID);
+  :Interpolate flight plan positions;
+  repeat
+    :Track update at Δt interval;
+    if (Track maintained?) then (yes)
+      :Add TrackPoint with noise (PR20);
+    else (no)
+      :Track drop (FR18);
+      :Attempt re-acquisition;
+    endif
+  repeat while (scenario duration?)
+  :Compute mean/max position error;
+  :→ TrackingResult;
+repeat while (more detected targets?)
+:→ List<TrackingResult>;
+
+|IdentificationSystem|
+:Phase 3: **Identification**;
+repeat
+  :Weather-adjusted Pi (PR13, PR14);
+  :Stochastic ID decision;
+  if (Identified?) then (yes)
+    :Classification (TP_I08);
+    :IFF check (FR14);
+    :Payload detection (FR20, FR21);
+    :Size estimation (TP_I01);
+    :→ IdentificationResult;
+  else (no)
+    :→ Not identified;
+  endif
+repeat while (more tracked targets?)
+:→ List<IdentificationResult>;
+
+|DtiPipeline|
+:Aggregate all results;
+:Compute Pd, Pfa, continuity, Pi;
+:Compute overall score;
+:→ **EvaluationResult**;
+stop
+
+@enduml

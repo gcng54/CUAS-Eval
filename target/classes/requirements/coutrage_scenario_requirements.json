@@ -1,0 +1,266 @@
+{
+  "source": "CWA 18150 — COURAGEOUS Scenario-Specific Requirements",
+  "version": "1.0",
+  "description": "Scenario-based requirements extracted from Coutrage_Scenarios_Requirements.xlsx",
+
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "Prison",
+      "fullName": "S1: Prison",
+      "location": "Outskirts, small trees, public roads",
+      "weather": "Morning, Sunny",
+      "uasCategory": "Class I mini multirotor",
+      "payload": "Drug payload (<250g); Smuggling",
+      "description": "Counter-UAS protection of prison facility against contraband delivery drones"
+    },
+    {
+      "id": "S2",
+      "name": "Airport",
+      "fullName": "S2: Airport",
+      "location": "Suburban, small vegetation",
+      "weather": "Evening, Rainy",
+      "uasCategory": "Class I mini fixed-wing (<15kg)",
+      "payload": "Optical camera; Careless use/Surveillance",
+      "description": "Airport airspace protection and glide path defence"
+    },
+    {
+      "id": "S3",
+      "name": "Nuclear Plant",
+      "fullName": "S3: Nuclear Plant",
+      "location": "Isolated rural, near river",
+      "weather": "Night, Cloudy",
+      "uasCategory": "Class I small custom multirotor (>15kg)",
+      "payload": "3kg explosive device; Infrastructure damage",
+      "description": "Nuclear facility protection including reactor buildings and spent fuel storage"
+    },
+    {
+      "id": "S4",
+      "name": "Gov. Building",
+      "fullName": "S4: Government Building",
+      "location": "Urban, high-rise buildings",
+      "weather": "Afternoon, Clear",
+      "uasCategory": "3 UAS (Class I mini/micro/small)",
+      "payload": "Video equipment; Kinetic attack against VIP",
+      "description": "Government building protection in urban environment against multi-UAS threat"
+    },
+    {
+      "id": "S5",
+      "name": "Stadium",
+      "fullName": "S5: Stadium",
+      "location": "Suburban, industrial facilities",
+      "weather": "Evening, Cloudy",
+      "uasCategory": "Class I small custom multirotor (>15kg)",
+      "payload": "Aerosol dispersing device; Create panic",
+      "description": "Stadium event protection with mobile CUAS deployment"
+    },
+    {
+      "id": "S6",
+      "name": "Outdoor Concert",
+      "fullName": "S6: Outdoor Concert",
+      "location": "Suburban, 20m metallic stage",
+      "weather": "Evening, Windy",
+      "uasCategory": "Class I mini multirotor (15kg)",
+      "payload": "Dazzling laser; Disrupt event",
+      "description": "Outdoor concert/event protection with metallic interference challenges"
+    },
+    {
+      "id": "S7",
+      "name": "Political Rally",
+      "fullName": "S7: Political Rally",
+      "location": "Middle of city, public square",
+      "weather": "Evening, Clear",
+      "uasCategory": "Class I mini commercial multirotor (<15kg)",
+      "payload": "Noise generator; Create panic/disturbance",
+      "description": "Political rally protection in urban square with mobile truck-based system"
+    },
+    {
+      "id": "S8",
+      "name": "Int. Summit",
+      "fullName": "S8: International Summit",
+      "location": "Rural, historical location",
+      "weather": "Evening, Dusty",
+      "uasCategory": "Class I small commercial fixed-wing (>15kg)",
+      "payload": "Terrorist disturbance; Create panic",
+      "description": "International summit protection with covert CUAS operations"
+    },
+    {
+      "id": "S9",
+      "name": "Land Border",
+      "fullName": "S9: Land Border",
+      "location": "Rural, dense vegetation (100km)",
+      "weather": "Misty night",
+      "uasCategory": "Class I small custom multirotor (>15kg)",
+      "payload": "2kg box; Trafficking (drugs/guns/etc.)",
+      "description": "Land border protection with chained systems over long-distance linear border"
+    },
+    {
+      "id": "S10",
+      "name": "Maritime Border",
+      "fullName": "S10: Maritime Border",
+      "location": "Sea border",
+      "weather": "Night, Clear",
+      "uasCategory": "Class I mini commercial multirotor (<15kg)",
+      "payload": "Thermal sensor; Evade coast guard",
+      "description": "Maritime border protection in saline environment with stealth requirements"
+    }
+  ],
+
+  "sections": {
+    "operationalRequirements": [
+      { "id": "S1_GR1", "scenario": "S1", "name": "Integration in the prison ecosystem", "description": "Design to minimize disruption to daily operations; no interference with communication or essential operations.", "importance": "SHALL", "type": "Operational", "category": "Architecture" },
+      { "id": "S1_GR2", "scenario": "S1", "name": "Integration in security infrastructure", "description": "Possibility to integrate with access control, CCTV, and personnel for situational awareness.", "importance": "SHOULD", "type": "Operational", "category": "Architecture" },
+      { "id": "S1_GR3", "scenario": "S1", "name": "Sensor performances", "description": "Early detection and tracking of unauthorized drones in the vicinity, covering the entire perimeter.", "importance": "SHALL", "type": "Operational", "category": "Detection" },
+      { "id": "S1_GR4", "scenario": "S1", "name": "Countermeasure activation", "description": "Automated response system for quick interception or disabling before contraband delivery.", "importance": "MAY", "type": "Operational", "category": "Automation" },
+      { "id": "S2_GR1", "scenario": "S2", "name": "Integration in airport ecosystem", "description": "System shall not compromise existing aviation safety measures.", "importance": "SHALL", "type": "Operational", "category": "Architecture" },
+      { "id": "S2_GR4", "scenario": "S2", "name": "System coverage", "description": "Shall cover the entire flight operations area, especially approach and transition areas.", "importance": "SHALL", "type": "Operational", "category": "SiteSpecific" },
+      { "id": "S2_GR5", "scenario": "S2", "name": "System integration", "description": "Shall be integrated with Air Traffic Control (ATC) services.", "importance": "SHALL", "type": "Operational", "category": "Architecture" },
+      { "id": "S2_GR9", "scenario": "S2", "name": "Countermeasure activation", "description": "Countermeasures activated by specialized operators only after ATC approval.", "importance": "SHALL", "type": "Operational", "category": "HMI" },
+      { "id": "S3_GR1", "scenario": "S3", "name": "System coverage", "description": "Focus on reactor buildings and spent fuel storage; detect UAS approaching or hovering.", "importance": "SHALL", "type": "Operational", "category": "SiteSpecific" },
+      { "id": "S3_GR4", "scenario": "S3", "name": "Geofencing", "description": "Implement geofencing to restrict UAS movement within plant airspace.", "importance": "SHOULD", "type": "Operational", "category": "Automation" },
+      { "id": "S3_GR6", "scenario": "S3", "name": "Countermeasure activation", "description": "Integrated with power plant C2; activation requires approval from plant operators.", "importance": "SHALL", "type": "Operational", "category": "HMI" },
+      { "id": "S4_GR1", "scenario": "S4", "name": "Reducing False Positives", "description": "Advanced algorithms to minimize disruptions to legitimate UAS activities in urban areas.", "importance": "SHALL", "type": "Operational", "category": "Detection" },
+      { "id": "S4_GR2", "scenario": "S4", "name": "Emergency Response Integration", "description": "Integration with emergency protocols and coordination with response teams.", "importance": "SHOULD", "type": "Operational", "category": "Architecture" },
+      { "id": "S5_GR1", "scenario": "S5", "name": "Technical expectation", "description": "Solution shall be completely mobile for quick manual installation in temporary locations.", "importance": "SHALL", "type": "Operational", "category": "Logistics" },
+      { "id": "S5_GR6", "scenario": "S5", "name": "Privacy Protection", "description": "Implementation of measures to safeguard the privacy of individuals around the stadium.", "importance": "SHALL", "type": "Operational", "category": "Operational" },
+      { "id": "S6_GR3", "scenario": "S6", "name": "Laser Threat Detection", "description": "Capabilities to identify and track UAS equipped with dazzling lasers.", "importance": "SHOULD", "type": "Operational", "category": "Detection" },
+      { "id": "S7_GR1", "scenario": "S7", "name": "Technical expectation", "description": "Components installed on a VAN/truck to allow quick mobile operations in urban squares.", "importance": "SHALL", "type": "Operational", "category": "Logistics" },
+      { "id": "S8_GR10", "scenario": "S8", "name": "Covert Operation Capability", "description": "Option for covert operation to conceal presence and maintain the element of surprise.", "importance": "MAY", "type": "Operational", "category": "Operational" },
+      { "id": "S9_GR1", "scenario": "S9", "name": "Technical expectation", "description": "Low power consumption; must work with batteries or renewable sources.", "importance": "SHALL", "type": "Operational", "category": "Logistics" },
+      { "id": "S9_GR4", "scenario": "S9", "name": "Chaining Systems", "description": "Must allow chaining of several systems to protect linear borders over 50 km.", "importance": "SHALL", "type": "Operational", "category": "Architecture" },
+      { "id": "S9_GR8", "scenario": "S9", "name": "RailSAR", "description": "Integrate foliage penetration radar to detect threats hidden in dense vegetation.", "importance": "MAY", "type": "Operational", "category": "Detection" },
+      { "id": "S10_GR1", "scenario": "S10", "name": "Technical expectation", "description": "Components must be tested and certified for use in saline environments.", "importance": "SHALL", "type": "Operational", "category": "Logistics" },
+      { "id": "S10_GR8", "scenario": "S10", "name": "Stealth Operations", "description": "Provide stealth technologies and low-signature practices to avoid counter-detection.", "importance": "SHALL", "type": "Operational", "category": "Operational" }
+    ],
+
+    "scenarioFunctionalRequirements": [
+      { "id": "FRPR_6",  "scenario": "S1", "importance": "Shall",   "description": "Detect a single class C1 UAS (weight <900g).",                                       "type": "Functional", "category": "Detection" },
+      { "id": "FRPR_12", "scenario": "S1", "importance": "Shall",   "description": "Be immune to false alarms caused by flying birds.",                                    "type": "Functional", "category": "Detection" },
+      { "id": "FRPR_16", "scenario": "S1", "importance": "Should",  "description": "Provide ability to determine coordinates of the UAS pilot.",                            "type": "Functional", "category": "Tracking" },
+      { "id": "FRAP_3",  "scenario": "S2", "importance": "Shall",   "description": "Detect UAS in poor visibility/adverse weather conditions.",                             "type": "Functional", "category": "Detection" },
+      { "id": "FRAP_12", "scenario": "S2", "importance": "Shall",   "description": "Distinguish UAS from general aviation (helicopters/airplanes).",                        "type": "Functional", "category": "Identification" },
+      { "id": "FRAP_18", "scenario": "S2", "importance": "Shall",   "description": "Detect all UAS in strong electromagnetic interference.",                                "type": "Functional", "category": "Detection" },
+      { "id": "FRNP_7",  "scenario": "S3", "importance": "Shall",   "description": "Detect a single class I small UAS (<15 kg) with optical camera.",                       "type": "Functional", "category": "Detection" },
+      { "id": "FRNP_13", "scenario": "S3", "importance": "Shall",   "description": "Enable UAS tracking in the dark.",                                                     "type": "Functional", "category": "Tracking" },
+      { "id": "FRNP_17", "scenario": "S3", "importance": "Shall",   "description": "Distinguish between friend or foe UAS (IFF).",                                         "type": "Functional", "category": "Identification" },
+      { "id": "FRGB_13", "scenario": "S4", "importance": "Shall",   "description": "Identify the load carried by the UAS.",                                                "type": "Functional", "category": "Identification" },
+      { "id": "FRGB_22", "scenario": "S4", "importance": "Shall",   "description": "Estimate the position of the UAS in real time as soon as detected.",                    "type": "Functional", "category": "HMI" },
+      { "id": "FRST_7",  "scenario": "S5", "importance": "Shall",   "description": "Detect discharge of load based on characteristic technology features.",                 "type": "Functional", "category": "Detection" },
+      { "id": "FRST_36", "scenario": "S5", "importance": "Shall",   "description": "Alert operator that UAS is approaching facility's critical zone.",                      "type": "Functional", "category": "HMI" },
+      { "id": "FROC_13", "scenario": "S6", "importance": "Shall",   "description": "Enable operator to independently identify non-commercial UAS via prompts.",             "type": "Functional", "category": "HMI" },
+      { "id": "FROC_19", "scenario": "S6", "importance": "Shall",   "description": "Keep logs of detected objects with operator classification (false alarm/threat).",      "type": "Functional", "category": "HMI" },
+      { "id": "FROR_2",  "scenario": "S7", "importance": "Shall",   "description": "Track all UAS in strong electromagnetic interference.",                                "type": "Functional", "category": "Tracking" },
+      { "id": "FROR_13", "scenario": "S7", "importance": "Shall",   "description": "Continue tracking despite temporary loss of sight.",                                    "type": "Functional", "category": "Tracking" },
+      { "id": "FRIS_3",  "scenario": "S8", "importance": "Shall",   "description": "Detect a UAS flying autonomously.",                                                    "type": "Functional", "category": "Detection" },
+      { "id": "FRIS_17", "scenario": "S8", "importance": "Shall",   "description": "Estimate position of UAS in real time upon detection.",                                 "type": "Functional", "category": "HMI" },
+      { "id": "FRLB_4",  "scenario": "S9", "importance": "Shall",   "description": "Detect in a difficult environment — afforestation.",                                    "type": "Functional", "category": "Detection" },
+      { "id": "FRLB_19", "scenario": "S9", "importance": "Shall",   "description": "Detect discharge of a possible load based on characteristic features.",                 "type": "Functional", "category": "Detection" },
+      { "id": "FRMB_1",  "scenario": "S10", "importance": "Shall",  "description": "Provide observation capability regardless of sea state.",                               "type": "Functional", "category": "Operational" },
+      { "id": "FRMB_7",  "scenario": "S10", "importance": "Shall",  "description": "Be resistant to severe weather conditions — strong wind.",                              "type": "Functional", "category": "Operational" },
+      { "id": "FRMB_27", "scenario": "S10", "importance": "Shall",  "description": "Alarm operator of malicious UAS with specified False Positive Rate (FPR).",             "type": "Functional", "category": "HMI" }
+    ],
+
+    "scenarioPerformanceRequirements": [
+      { "id": "PRPR_1",  "scenario": "S1",  "importance": "Shall",   "description": "Operate 24 hours a day, 7 days a week.",                                              "type": "Performance", "category": "Automation" },
+      { "id": "PRPR_10", "scenario": "S1",  "importance": "Shall",   "description": "Detect all UAS with no missed detections.",                                            "type": "Performance", "category": "Detection" },
+      { "id": "PRPR_18", "scenario": "S1",  "importance": "Shall",   "description": "Detect the dropping of the load.",                                                     "type": "Performance", "category": "Detection" },
+      { "id": "PRAP_9",  "scenario": "S2",  "importance": "Shall",   "description": "Detect all UAS within detection area and glide path range.",                            "type": "Performance", "category": "Detection" },
+      { "id": "PRAP_12", "scenario": "S2",  "importance": "Shall",   "description": "Use DTI technologies that do not affect infrastructure systems.",                       "type": "Performance", "category": "Automation" },
+      { "id": "PRNP_12", "scenario": "S3",  "importance": "Shall",   "description": "Have an appropriate API enabling communication with other systems.",                    "type": "Performance", "category": "HMI" },
+      { "id": "PRNP_18", "scenario": "S3",  "importance": "Shall",   "description": "Enable UAS detection in difficult weather conditions and at night.",                    "type": "Performance", "category": "Detection" },
+      { "id": "PRNP_25", "scenario": "S3",  "importance": "Shall",   "description": "Installation must not affect facility infrastructure or functioning.",                  "type": "Performance", "category": "SiteSpecific" },
+      { "id": "PRGB_12", "scenario": "S4",  "importance": "Should",  "description": "Percentage of false positive alarms at a level not more than TBD.",                     "type": "Performance", "category": "Tracking" },
+      { "id": "PRGB_21", "scenario": "S4",  "importance": "Should",  "description": "Be quickly deployable within a specific time TBD.",                                     "type": "Performance", "category": "Logistics" },
+      { "id": "PRGB_25", "scenario": "S4",  "importance": "Shall",   "description": "Use frequency bands permitted in the given country.",                                   "type": "Performance", "category": "Operational" },
+      { "id": "PRST_15", "scenario": "S5",  "importance": "Shall",   "description": "Provide detection at equal distances around the stadium.",                              "type": "Performance", "category": "Detection" },
+      { "id": "PRST_16", "scenario": "S5",  "importance": "Shall",   "description": "Run continuously for 12 hours.",                                                       "type": "Performance", "category": "Detection" },
+      { "id": "PRST_26", "scenario": "S5",  "importance": "Shall",   "description": "Resistant to being drowned out by loud concert noise.",                                 "type": "Performance", "category": "Automation" },
+      { "id": "PROC_5",  "scenario": "S6",  "importance": "Shall",   "description": "Server memory must provide recording and real-time access.",                             "type": "Performance", "category": "Automation" },
+      { "id": "PROC_12", "scenario": "S6",  "importance": "Should",  "description": "Integrate with counteraction systems via API for location data.",                       "type": "Performance", "category": "HMI" },
+      { "id": "PROR_6",  "scenario": "S7",  "importance": "Shall",   "description": "Cover an area of at least TBD.",                                                       "type": "Performance", "category": "SiteSpecific" },
+      { "id": "PROR_14", "scenario": "S7",  "importance": "Should",  "description": "API provides access to transmission type between UAS and operator.",                    "type": "Performance", "category": "HMI" },
+      { "id": "PRIS_4",  "scenario": "S8",  "importance": "Shall",   "description": "Detect all UAS with no missed detections.",                                             "type": "Performance", "category": "Detection" },
+      { "id": "PRIS_20", "scenario": "S8",  "importance": "Shall",   "description": "Be easy to deploy (defined by personnel, training, and tools).",                        "type": "Performance", "category": "Logistics" },
+      { "id": "PRLB_3",  "scenario": "S9",  "importance": "Shall",   "description": "Operate in an area without access to telecommunications networks.",                     "type": "Performance", "category": "Logistics" },
+      { "id": "PRLB_4",  "scenario": "S9",  "importance": "Shall",   "description": "Transmit D, T, I signals over long distances to the operator.",                         "type": "Performance", "category": "Logistics" },
+      { "id": "PRLB_14", "scenario": "S9",  "importance": "Shall",   "description": "Enable detection in inaccessible rural areas with dense vegetation.",                   "type": "Performance", "category": "Detection" },
+      { "id": "PRMB_1",  "scenario": "S10", "importance": "Shall",   "description": "Ensure stability of observations under nighttime conditions.",                          "type": "Performance", "category": "Operational" },
+      { "id": "PRMB_16", "scenario": "S10", "importance": "Should",  "description": "Detect UAS at specific heights right above sea level.",                                 "type": "Performance", "category": "Detection" },
+      { "id": "PRMB_37", "scenario": "S10", "importance": "Shall",   "description": "Transmit D, T, I signals over long distances to the operator.",                         "type": "Performance", "category": "Logistics" }
+    ]
+  },
+
+  "scenarioRequirementLinks": {
+    "S1": {
+      "operational": ["S1_GR1", "S1_GR2", "S1_GR3", "S1_GR4"],
+      "functional": ["FRPR_6", "FRPR_12", "FRPR_16"],
+      "performance": ["PRPR_1", "PRPR_10", "PRPR_18"]
+    },
+    "S2": {
+      "operational": ["S2_GR1", "S2_GR4", "S2_GR5", "S2_GR9"],
+      "functional": ["FRAP_3", "FRAP_12", "FRAP_18"],
+      "performance": ["PRAP_9", "PRAP_12"]
+    },
+    "S3": {
+      "operational": ["S3_GR1", "S3_GR4", "S3_GR6"],
+      "functional": ["FRNP_7", "FRNP_13", "FRNP_17"],
+      "performance": ["PRNP_12", "PRNP_18", "PRNP_25"]
+    },
+    "S4": {
+      "operational": ["S4_GR1", "S4_GR2"],
+      "functional": ["FRGB_13", "FRGB_22"],
+      "performance": ["PRGB_12", "PRGB_21", "PRGB_25"]
+    },
+    "S5": {
+      "operational": ["S5_GR1", "S5_GR6"],
+      "functional": ["FRST_7", "FRST_36"],
+      "performance": ["PRST_15", "PRST_16", "PRST_26"]
+    },
+    "S6": {
+      "operational": ["S6_GR3"],
+      "functional": ["FROC_13", "FROC_19"],
+      "performance": ["PROC_5", "PROC_12"]
+    },
+    "S7": {
+      "operational": ["S7_GR1"],
+      "functional": ["FROR_2", "FROR_13"],
+      "performance": ["PROR_6", "PROR_14"]
+    },
+    "S8": {
+      "operational": ["S8_GR10"],
+      "functional": ["FRIS_3", "FRIS_17"],
+      "performance": ["PRIS_4", "PRIS_20"]
+    },
+    "S9": {
+      "operational": ["S9_GR1", "S9_GR4", "S9_GR8"],
+      "functional": ["FRLB_4", "FRLB_19"],
+      "performance": ["PRLB_3", "PRLB_4", "PRLB_14"]
+    },
+    "S10": {
+      "operational": ["S10_GR1", "S10_GR8"],
+      "functional": ["FRMB_1", "FRMB_7", "FRMB_27"],
+      "performance": ["PRMB_1", "PRMB_16", "PRMB_37"]
+    }
+  },
+
+  "requirementTypeKeys": {
+    "functional": {
+      "D": "Detection",
+      "T": "Tracking",
+      "I": "Identification",
+      "H": "Human-Machine Interface / Operator Alarms",
+      "A": "Automation / Integration",
+      "O": "Operational / Environmental"
+    },
+    "performance": {
+      "A": "Automation / Recording / Infrastructure Impact",
+      "D": "Detection / Computing Power",
+      "T": "Tracking / Accuracy",
+      "I": "Identification / Classification",
+      "H": "HMI / API / Integration",
+      "S": "Site-Specific / Installation / Area Coverage",
+      "L": "Logistics / Deployment / Remote Operation",
+      "O": "Operational / Legal Compliance"
+    }
+  }
+}

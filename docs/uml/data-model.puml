@@ -1,0 +1,499 @@
+@startuml data-model
+!theme cerulean
+title CUAS-Eval v2.0 Domain Model\nCWA 18150 + Enhanced Capabilities
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #1565C0
+    HeaderBackgroundColor #E3F2FD
+}
+
+skinparam note {
+    BackgroundColor #FFF9C4
+    BorderColor #F9A825
+}
+
+' ════════════════════════════════════════════════════════════════
+' ENUMERATIONS
+' ════════════════════════════════════════════════════════════════
+
+enum RequirementType {
+    FUNCTIONAL
+    PERFORMANCE
+    TESTABLE
+}
+
+enum RequirementCategory {
+    DETECTION
+    TRACKING
+    IDENTIFICATION
+    HMI
+    ARCHITECTURE
+    LOGISTICS
+}
+
+enum UasClass {
+    C0
+    C1
+    C2
+    C3
+    C4
+    SPECIFIC
+    UNKNOWN
+}
+
+enum WeatherCondition {
+    CLEAR
+    CLOUDY
+    RAIN
+    FOG
+    SNOW
+    NIGHT_CLEAR
+    NIGHT_OVERCAST
+}
+
+enum EwCondition {
+    NONE
+    LOW
+    MEDIUM
+    HIGH
+}
+
+enum SensorType {
+    RADAR
+    EO_IR
+    RF_DETECTOR
+    ACOUSTIC
+    LIDAR
+    MULTI_SENSOR
+}
+
+enum FusionStrategy {
+    OR_LOGIC
+    VOTING
+    AND_LOGIC
+    BEST_SENSOR
+}
+
+enum ObstacleType {
+    BUILDING
+    TOWER
+    TREE_LINE
+    HILL
+    WALL
+    CUSTOM
+}
+
+enum FlightPattern {
+    STRAIGHT_LINE
+    ORBIT
+    RACETRACK
+    RANDOM_WALK
+    APPROACH_RETREAT
+    CUSTOM
+}
+
+' ════════════════════════════════════════════════════════════════
+' CORE DOMAIN CLASSES
+' ════════════════════════════════════════════════════════════════
+
+class GeoPosition {
+    - latitude : double
+    - longitude : double
+    - altitudeMsl : double
+    + distanceTo(other) : double
+    + bearingTo(other) : double
+}
+
+class Requirement {
+    - id : String
+    - type : String
+    - category : String
+    - name : String
+    - parameter : String
+    - unit : String
+    - description : String
+    - editable : boolean
+    + getRequirementType() : RequirementType
+    + getRequirementCategory() : RequirementCategory
+}
+
+class UasTarget {
+    - uid : String
+    - designation : String
+    - uasClass : UasClass
+    - massGrams : double
+    - maxSpeedMs : double
+    - position : GeoPosition
+    - headingDeg : double
+    - speedMs : double
+    - hasPayload : boolean
+    - rcsSqm : double
+    - friendly : boolean
+    - hasJammer : boolean
+    - jammerPowerW : double
+}
+
+note right of UasTarget
+  <b>NEW:</b> hasJammer & jammerPowerW
+  support UAS-mounted EW (EV-03)
+end note
+
+' ════════════════════════════════════════════════════════════════
+' ENVIRONMENT (Weather + EW + Obstacles)
+' ════════════════════════════════════════════════════════════════
+
+class TestEnvironment {
+    - name : String
+    - centrePosition : GeoPosition
+    - observationRadiusM : double
+    - terrainType : String
+    - weather : WeatherCondition
+    - timeOfDay : String
+    - sensorSites : List<SensorSite>
+    - obstacles : List<Obstacle>
+    -- <color:green>NEW v2.0</color> --
+    - ewCondition : EwCondition
+    - ewFactor : double
+    - ewAffectedBands : List<String>
+    - ewJammerPosition : GeoPosition
+}
+
+note right of TestEnvironment
+  <b>EW Effects (EV-01, EV-02):</b>
+  ewFactor (0.0–1.0) degrades RF
+  sensors analogous to weather.
+  ewCondition maps to factor:
+  NONE=1.0, LOW=0.8, MED=0.5, HIGH=0.2
+end note
+
+class SensorSite {
+    - sensorId : String
+    - sensorType : String
+    - position : GeoPosition
+    - maxRangeM : double
+    - azimuthCoverageDeg : double
+    - sensorTemplate : CuasSensor
+}
+
+class Obstacle {
+    - description : String
+    - position : GeoPosition
+    - heightM : double
+    - widthM : double
+    -- <color:green>NEW v2.0</color> --
+    - lengthM : double
+    - obstacleType : ObstacleType
+}
+
+note right of Obstacle
+  <b>TR-01, TR-02:</b> Obstacles act as
+  virtual terrain for LOS blocking.
+  Type determines rendering & mask
+  contribution.
+end note
+
+' ════════════════════════════════════════════════════════════════
+' SENSORS (Editable Library + Coverage)
+' ════════════════════════════════════════════════════════════════
+
+class CuasSensor {
+    - sensorId : String
+    - name : String
+    - sensorType : SensorType
+    - subType : String
+    - maxRangeM : double
+    - minRangeM : double
+    - maxAltitudeM : double
+    - minAltitudeM : double
+    - azimuthCoverageDeg : double
+    - elevationCoverageDeg : double
+    - basePd : double
+    - referenceRangeM : double
+    - falseAlarmRate : double
+    - positionAccuracyM : double
+    - updateRateHz : double
+    - trackingNoiseM : double
+    - canIdentify : boolean
+    - identificationPd : double
+    - rainFactor : double
+    - fogFactor : double
+    - nightFactor : double
+    -- <color:green>NEW v2.0</color> --
+    - ewSensitivity : double
+    - minElevationDeg : double
+    - maxElevationDeg : double
+    - azimuthStartDeg : double
+    + computePd(range, rcs, weather, ew) : double
+    + computeEwFactor(ewCondition) : double
+    + getWeatherFactor(weather) : double
+    + copy() : CuasSensor
+}
+
+note right of CuasSensor
+  <b>SN-03:</b> Coverage defined by
+  min/max elevation + azimuth sector.
+  <b>EV-02:</b> ewSensitivity determines
+  how much EW degrades this sensor.
+  RF sensors: high sensitivity
+  EO/IR, Acoustic: immune (1.0)
+end note
+
+class SensorLibrary {
+    - {static} TEMPLATES : Map<String, CuasSensor>
+    -- <color:green>NEW v2.0 (SN-02)</color> --
+    + {static} addTemplate(sensor) : void
+    + {static} updateTemplate(sensor) : void
+    + {static} removeTemplate(id) : boolean
+    + {static} saveToJson(file) : void
+    + {static} loadFromJson(file) : void
+    + {static} getTemplate(id) : CuasSensor
+    + {static} getAllTemplates() : List
+    + {static} getTemplatesByType(type) : List
+    + {static} getSummary() : String
+}
+
+' ════════════════════════════════════════════════════════════════
+' MULTI-DTI SYSTEM
+' ════════════════════════════════════════════════════════════════
+
+class MultiDtiSystem {
+    - nodes : List<DtiNode>
+    - detectionFusion : FusionStrategy
+    - votingThreshold : int
+    + addNode(id, name, pos, sensor) : DtiNode
+    + execute(scenario) : EvaluationResult
+    + computeCoverageMetrics() : Map
+}
+
+class DtiNode {
+    - nodeId : String
+    - nodeName : String
+    - position : GeoPosition
+    - sensor : CuasSensor
+    - pipeline : DtiPipeline
+}
+
+' ════════════════════════════════════════════════════════════════
+' SCENARIO & FLIGHT PLANNING
+' ════════════════════════════════════════════════════════════════
+
+class TestScenario {
+    - scenarioId : String
+    - name : String
+    - description : String
+    - environment : TestEnvironment
+    - targets : List<UasTarget>
+    - flightPlans : List<FlightPlan>
+    - durationSeconds : double
+    - requirementIds : List<String>
+    -- <color:green>NEW v2.0 (AM-01)</color> --
+    + saveToJson(file) : void
+    + {static} loadFromJson(file) : TestScenario
+}
+
+class FlightPlan {
+    - targetUid : String
+    - waypoints : List<Waypoint>
+    -- <color:green>NEW v2.0</color> --
+    - pattern : FlightPattern
+    + totalDistanceM() : double
+}
+
+class Waypoint {
+    - position : GeoPosition
+    - speedMs : double
+    - timeOffsetSeconds : double
+}
+
+class FlightPlanGenerator {
+    + generateStraightLine(start, end, speed) : FlightPlan
+    + generateOrbit(centre, radiusM, altM, speed, laps) : FlightPlan
+    + generateRacetrack(start, end, width, speed) : FlightPlan
+    + generateRandomWalk(centre, radiusM, speed, duration) : FlightPlan
+    + generateApproachRetreat(start, target, speed) : FlightPlan
+}
+
+note right of FlightPlanGenerator
+  <b>TG-02:</b> Standard flight patterns
+  for scenario construction.
+end note
+
+' ════════════════════════════════════════════════════════════════
+' TERRAIN (Mask + Obstacles)
+' ════════════════════════════════════════════════════════════════
+
+class TerrainMaskCalculator {
+    - dtedReader : DtedReader
+    -- <color:green>NEW v2.0 (TR-02, TR-03)</color> --
+    - obstacles : List<Obstacle>
+    - antennaHeightAgl : double
+    - earthCurvatureEnabled : boolean
+    + computeTerrainMask(pos, alt, range, az, samples) : TerrainMask
+    + setObstacles(obstacles) : void
+    + setAntennaHeightAgl(m) : void
+    + setEarthCurvature(enabled) : void
+}
+
+class TerrainMask {
+    - sensorPosition : GeoPosition
+    - sensorAltitude : double
+    - maxRangeM : double
+    - azimuths : double[]
+    - maskAngles : double[]
+    + getMaskAngleAt(azimuth) : double
+    + isVisible(target) : boolean
+}
+
+class TerrainProfile {
+    - azimuthDeg : double
+    - maskAngleDeg : double
+    - distances : double[]
+    - elevations : double[]
+    - losAngles : double[]
+}
+
+' ════════════════════════════════════════════════════════════════
+' EVALUATION (Editable Criteria + Results)
+' ════════════════════════════════════════════════════════════════
+
+class DetectionResult {
+    - targetUid : String
+    - detected : boolean
+    - detectionTime : Instant
+    - latencySeconds : double
+    - reportedPosition : GeoPosition
+    - positionErrorMetres : double
+    - correctClassification : boolean
+    - sensorType : String
+}
+
+class TrackingResult {
+    - targetUid : String
+    - systemTrackId : String
+    - trackMaintained : boolean
+    - uidPreserved : boolean
+    - trackDropCount : int
+    - trackPoints : List<TrackPoint>
+    - meanPositionErrorMetres : double
+    - updateRateHz : double
+}
+
+class TrackPoint {
+    - timestamp : Instant
+    - reportedPosition : GeoPosition
+    - truthPosition : GeoPosition
+    - speedMs : double
+    - headingDeg : double
+}
+
+class IdentificationResult {
+    - targetUid : String
+    - identified : boolean
+    - reportedClassification : String
+    - classificationCorrect : boolean
+    - iffResult : Boolean
+    - payloadIdentified : boolean
+    - confidence : double
+}
+
+class EvaluationResult {
+    - scenarioId : String
+    - passed : boolean
+    - overallScore : double
+    - probabilityOfDetection : double
+    - falseAlarmRate : double
+    - trackContinuity : double
+    - probabilityOfIdentification : double
+    - passedRequirements : List<String>
+    - failedRequirements : List<String>
+    + getCompliancePercent() : double
+}
+
+class EvaluationCriteria {
+    - thresholds : Map<String, Threshold>
+    -- <color:green>NEW v2.0 (EM-01, EM-02)</color> --
+    - profileName : String
+    + addThreshold(reqId, metric, min, max) : void
+    + removeThreshold(reqId) : void
+    + evaluateRequirement(reqId, result) : boolean
+    + saveToJson(file) : void
+    + {static} loadFromJson(file) : EvaluationCriteria
+}
+
+class Threshold {
+    - requirementId : String
+    - metricName : String
+    - minValue : double
+    - maxValue : double
+    - unit : String
+    + passes(value) : boolean
+}
+
+' ════════════════════════════════════════════════════════════════
+' ASSET MANAGEMENT (AM-01)
+' ════════════════════════════════════════════════════════════════
+
+class AssetManager {
+    + saveSensors(file, sensors) : void
+    + loadSensors(file) : List<CuasSensor>
+    + saveTargets(file, targets, plans) : void
+    + loadTargets(file) : TargetSet
+    + saveEnvironment(file, env) : void
+    + loadEnvironment(file) : TestEnvironment
+    + saveScenario(file, scenario) : void
+    + loadScenario(file) : TestScenario
+    + saveCriteria(file, criteria) : void
+    + loadCriteria(file) : EvaluationCriteria
+}
+
+note right of AssetManager
+  <b>AM-01:</b> Central JSON
+  serialization for all asset types.
+  Uses Jackson ObjectMapper.
+end note
+
+' ════════════════════════════════════════════════════════════════
+' RELATIONSHIPS
+' ════════════════════════════════════════════════════════════════
+
+TestScenario "1" *-- "1" TestEnvironment
+TestScenario "1" *-- "*" UasTarget
+TestScenario "1" *-- "*" FlightPlan
+FlightPlan "1" *-- "*" Waypoint
+TestEnvironment "1" *-- "*" SensorSite
+TestEnvironment "1" *-- "*" Obstacle
+EvaluationResult "1" *-- "*" DetectionResult
+EvaluationResult "1" *-- "*" TrackingResult
+EvaluationResult "1" *-- "*" IdentificationResult
+TrackingResult "1" *-- "*" TrackPoint
+EvaluationCriteria "1" *-- "*" Threshold
+TerrainMask "1" *-- "*" TerrainProfile
+
+UasTarget --> GeoPosition : position
+SensorSite --> GeoPosition : position
+Waypoint --> GeoPosition : position
+DetectionResult --> GeoPosition : reported/truth
+TrackPoint --> GeoPosition : reported/truth
+UasTarget --> UasClass
+TestEnvironment --> WeatherCondition
+TestEnvironment --> EwCondition : ewCondition
+Requirement --> RequirementType
+Requirement --> RequirementCategory
+SensorSite --> CuasSensor : sensorTemplate
+CuasSensor --> SensorType
+SensorLibrary --> CuasSensor : "16+ templates"
+MultiDtiSystem "1" *-- "*" DtiNode
+DtiNode --> CuasSensor
+DtiNode --> GeoPosition : position
+MultiDtiSystem --> FusionStrategy
+FlightPlan --> FlightPattern
+FlightPlanGenerator --> FlightPlan : generates
+Obstacle --> ObstacleType
+TerrainMaskCalculator --> Obstacle : uses for LOS
+TerrainMaskCalculator --> TerrainMask : produces
+AssetManager --> TestScenario : save/load
+AssetManager --> CuasSensor : save/load
+AssetManager --> EvaluationCriteria : save/load
+
+@enduml

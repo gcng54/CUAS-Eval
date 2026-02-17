@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CUAS-Eval Report: Multi-UAS Simultaneous Detection (8 targets)</title>
+<style>
+body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+.header { background: #1a237e; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+.header h1 { margin: 0; } .header h2 { margin: 5px 0; font-weight: normal; opacity: 0.8; }
+.date { opacity: 0.6; font-size: 0.9em; }
+.section { background: white; padding: 15px 20px; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+h3 { color: #1a237e; border-bottom: 2px solid #1a237e; padding-bottom: 5px; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th { background: #e8eaf6; text-align: left; padding: 8px 12px; }
+td { padding: 6px 12px; border-bottom: 1px solid #eee; }
+tr:hover { background: #f5f5f5; }
+.pass { color: #2e7d32; font-weight: bold; }
+.fail { color: #c62828; font-weight: bold; }
+.verdict { font-size: 2em; text-align: center; padding: 15px; border-radius: 8px; margin: 10px 0; }
+.verdict.pass { background: #e8f5e9; color: #2e7d32; }
+.verdict.fail { background: #ffebee; color: #c62828; }
+.footer { text-align: center; color: #666; margin-top: 30px; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<div class="header">
+<h1>CUAS-Eval Test Report</h1>
+<h2>CWA 18150 — COURAGEOUS Counter-UAS Evaluation</h2>
+<p class="date">Generated: 2026-02-17 12:12:26</p>
+</div>
+<div class="section">
+<h3>1. Scenario Summary</h3>
+<table>
+<tr><td><strong>Scenario ID</strong></td><td>SC-002</td></tr>
+<tr><td><strong>Name</strong></td><td>Multi-UAS Simultaneous Detection (8 targets)</td></tr>
+<tr><td><strong>Description</strong></td><td>Multiple UAS enter from different directions. Tests multi-thread D/T/I without performance degradation.</td></tr>
+<tr><td><strong>Duration</strong></td><td>180 s</td></tr>
+<tr><td><strong>Weather</strong></td><td>CLEAR</td></tr>
+<tr><td><strong>Terrain</strong></td><td>OPEN_FIELD</td></tr>
+<tr><td><strong>Targets</strong></td><td>8</td></tr>
+<tr><td><strong>Sensors</strong></td><td>3</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>2. Overall Verdict</h3>
+<div class="verdict fail">FAIL</div>
+<table>
+<tr><td><strong>Overall Score</strong></td><td>35.0 / 100</td></tr>
+<tr><td><strong>Compliance</strong></td><td>80.0%</td></tr>
+<tr><td><strong>Requirements Passed</strong></td><td>4</td></tr>
+<tr><td><strong>Requirements Failed</strong></td><td>1</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>3. Performance Metrics</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Pd (Probability of Detection)</td><td>0.1250</td></tr>
+<tr><td>Pfa (False Alarm Rate)</td><td>0.0000</td></tr>
+<tr><td>Mean Detection Latency (s)</td><td>0.1421</td></tr>
+<tr><td>Mean Detection Error (m)</td><td>9.4014</td></tr>
+<tr><td>Detection Latency StdDev (s)</td><td>0.0000</td></tr>
+<tr><td>Detection Latency P95 (s)</td><td>0.1421</td></tr>
+<tr><td>Detection Error StdDev (m)</td><td>0.0000</td></tr>
+<tr><td>Detection Error P95 (m)</td><td>9.4014</td></tr>
+<tr><td>Track Continuity Ratio</td><td>0.0000</td></tr>
+<tr><td>Mean Track Error (m)</td><td>3.8187</td></tr>
+<tr><td>Track Update Rate (Hz)</td><td>1.0000</td></tr>
+<tr><td>Total Track Drops</td><td>1.0000</td></tr>
+<tr><td>Track Error P95 (m)</td><td>3.8187</td></tr>
+<tr><td>Track Error Max (m)</td><td>10.1064</td></tr>
+<tr><td>Pi (Probability of Identification)</td><td>1.0000</td></tr>
+<tr><td>IFF Accuracy</td><td>1.0000</td></tr>
+<tr><td>Mean Identification Latency (s)</td><td>2.3644</td></tr>
+<tr><td>Classification Accuracy</td><td>1.0000</td></tr>
+<tr><td>Payload Detection Rate</td><td>0.0000</td></tr>
+<tr><td>Overall Score (0-100)</td><td>35.0000</td></tr>
+<tr><td>Compliance (%)</td><td>80.0000</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>4. Requirement Compliance</h3>
+<table>
+<tr><th>Req ID</th><th>Name</th><th>Status</th></tr>
+<tr><td>FR05</td><td>Track multiple UAS</td><td class="pass">PASS</td></tr>
+<tr><td>FR07</td><td>Identify multiple UAS</td><td class="pass">PASS</td></tr>
+<tr><td>FR22</td><td>Detect while tracking</td><td class="pass">PASS</td></tr>
+<tr><td>FR24</td><td>Alarm while tracking</td><td class="pass">PASS</td></tr>
+<tr><td>FR02</td><td>Detect multiple UAS</td><td class="fail">FAIL</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>5. Detection Results</h3>
+<table>
+<tr><th>Target</th><th>Detected</th><th>Latency (s)</th><th>Error (m)</th><th>Sensor</th></tr>
+<tr><td>B9BFCA5A</td><td>false</td><td>0.00</td><td>0.0</td><td>RADAR</td></tr>
+<tr><td>484D98A1</td><td>false</td><td>0.00</td><td>0.0</td><td>RADAR</td></tr>
+<tr><td>C7717CB0</td><td>false</td><td>0.00</td><td>0.0</td><td>RADAR</td></tr>
+<tr><td>6D89ACE5</td><td>true</td><td>0.14</td><td>9.4</td><td>RADAR</td></tr>
+<tr><td>597DB8BA</td><td>false</td><td>0.00</td><td>0.0</td><td>RADAR</td></tr>
+<tr><td>97C38B42</td><td>false</td><td>0.00</td><td>0.0</td><td>RADAR</td></tr>
+<tr><td>279B1807</td><td>false</td><td>0.00</td><td>0.0</td><td>RADAR</td></tr>
+<tr><td>923A2A70</td><td>false</td><td>0.00</td><td>0.0</td><td>RADAR</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>6. Tracking Results</h3>
+<table>
+<tr><th>Target</th><th>Track ID</th><th>Maintained</th><th>Drops</th><th>Mean Error (m)</th><th>Points</th></tr>
+<tr><td>6D89ACE5</td><td>TRK-6D89ACE5</td><td>false</td><td>1</td><td>3.8</td><td>179</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>7. Identification Results</h3>
+<table>
+<tr><th>Target</th><th>Identified</th><th>Classification</th><th>Correct</th><th>Confidence</th></tr>
+<tr><td>6D89ACE5</td><td>true</td><td>C2</td><td>true</td><td>0.87</td></tr>
+</table>
+</div>
+<div class="footer">
+<p>CUAS-Eval v1.0 | CWA 18150 COURAGEOUS | Generated by CUAS-Evaluator</p>
+</div>
+</body>
+</html>
