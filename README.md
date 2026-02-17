@@ -5,6 +5,9 @@
 A standalone Java/JavaFX module for evaluating Counter-UAS Detection, Tracking,
 and Identification (DTI) systems against CWA 18150 test methodology requirements.
 
+![Ekran Sensors](https://github.com/user-attachments/assets/d14f2883-44fa-4321-9bc2-7643a41671de)
+
+
 ## What's New in v2.0
 
 - **Enhanced UI**: Restructured 2-pane layout with 5 tabs (Scenarios, Sensors, Terrain, Results, Report); expanded map viewport
