@@ -2,7 +2,6 @@ package io.github.gcng54.cuaseval;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import io.github.gcng54.cuaseval.ui.MainView;
 import org.slf4j.Logger;
@@ -35,10 +34,9 @@ public class CuasEvalApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        log.info("╔═══════════════════════════════════════════════════╗");
-        log.info("║       CUAS-Eval v1.0 — CWA 18150 Evaluator      ║");
-        log.info("║     Counter-UAS DTI Performance Evaluation       ║");
-        log.info("╚═══════════════════════════════════════════════════╝");
+        log.info("    CUAS-Eval v2.0 — CWA 18150 Evaluator   ");
+        log.info("    Counter-UAS DTI Performance Evaluation ");
+        log.info("    Gokhan Cengiz - 2026                   ");
 
         // Create main view
         MainView mainView = new MainView();

@@ -1,0 +1,24 @@
+{
+  "name" : "Default Environment",
+  "centrePosition" : {
+    "latitude" : 38.4,
+    "longitude" : 26.8,
+    "altitudeMsl" : 0.0
+  },
+  "observationRadiusM" : 40000.0,
+  "terrainType" : null,
+  "weather" : "CLOUDY",
+  "timeOfDay" : "DAY",
+  "sensorSites" : [ ],
+  "obstacles" : [ ],
+  "parameters" : {
+    "visibility" : "10000",
+    "temperature" : "20",
+    "humidity" : "50",
+    "windSpeed" : "5.0"
+  },
+  "ewCondition" : "NONE",
+  "ewFactor" : 1.0,
+  "ewAffectedBands" : [ "2.4 GHz", "5.8 GHz", "915 MHz", "433 MHz" ],
+  "ewJammerPosition" : null
+}
